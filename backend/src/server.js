@@ -16,7 +16,7 @@ import {
   addQuiz,
   startQuiz,
   endQuiz,
-  submitAnswer,
+  submitAnswers,
   getResults,
   assertOwnsQuiz,
   getQuiz,
@@ -35,7 +35,7 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true, }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '50mb', }));
 
 const catchErrors = fn => async (req, res) => {
   try {
@@ -57,9 +57,9 @@ const catchErrors = fn => async (req, res) => {
                        Auth Functions
 ***************************************************************/
 
-const authed = fn => (req, res) => {
+const authed = fn => async (req, res) => {
   const email = getEmailFromAuthorization(req.header('Authorization'));
-  fn(req, res, email);
+  await fn(req, res, email);
 };
 
 app.post('/admin/auth/login', catchErrors(async (req, res) => {
@@ -152,30 +152,30 @@ app.get('/admin/session/:sessionid/results', catchErrors(authed(async (req, res,
 app.post('/play/join/:sessionid', catchErrors(async (req, res) => {
   const { sessionid, } = req.params;
   const { name, } = req.body;
-  await playerJoin(name, sessionid);
-  return res.status(200).send({});
+  const playerId = await playerJoin(name, sessionid);
+  return res.status(200).send({ playerId, });
 }));
 
 app.get('/play/:playerid/question', catchErrors(async (req, res) => {
   const { playerid, } = req.params;
-  return res.status(200).send({ question: getQuestion(playerid), });
+  return res.status(200).send({ question: await getQuestion(playerid), });
 }));
 
 app.get('/play/:playerid/answer', catchErrors(async (req, res) => {
   const { playerid, } = req.params;
-  return res.status(200).send({ question: getAnswers(playerid), });
+  return res.status(200).send({ question: await getAnswers(playerid), });
 }));
 
 app.put('/play/:playerid/answer', catchErrors(async (req, res) => {
   const { playerid, } = req.params;
-  const { answerid, } = req.body;
-  await submitAnswer(playerid, answerid);
+  const { answerList, } = req.body;
+  await submitAnswers(playerid, answerList);
   return res.status(200).send({});
 }));
 
-app.put('/play/:playerid/results', catchErrors(async (req, res) => {
+app.get('/play/:playerid/results', catchErrors(async (req, res) => {
   const { playerid, } = req.params;
-  return res.status(200).send({ results: getResults(playerid), });
+  return res.status(200).send({ results: await getResults(playerid), });
 }));
 
 /***************************************************************

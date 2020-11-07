@@ -1,5 +1,6 @@
 import React from 'react';
-import { API } from './api';
+import { API } from '../api';
+import '../App.css';
 
 const api = new API('http://localhost:5005');
 
@@ -7,9 +8,9 @@ export class SignupForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange_email = this.handleChange_email.bind(this);
-    this.handleChange_name = this.handleChange_name.bind(this);
-    this.handleChange_pwd = this.handleChange_pwd.bind(this);
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleChangeName = this.handleChangeName.bind(this);
+    this.handleChangePwd = this.handleChangePwd.bind(this);
     this.reg_email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,5}$/;
 
     this.state = {
@@ -20,22 +21,26 @@ export class SignupForm extends React.Component {
   }
 
   handleSubmit(event) {
-    const { thisState } = this.state;
-    const emailInput = { thisState }.email;
-    const password = { thisState }.pwd;
-    const nameInput = { thisState }.name;
-    if (!this.reg_email.test(emailInput)) {
+    // const { thisState } = this.state;
+    // eslint-disable-next-line react/destructuring-assignment
+    const { email } = this.state;
+    // eslint-disable-next-line react/destructuring-assignment
+    const password = this.state.pwd;
+    // eslint-disable-next-line react/destructuring-assignment
+    const { name } = this.state;
+    // console.log(`${email} ${password} ${name}`);
+    if (!this.reg_email.test(email)) {
       alert('incorrect email format!');
     } else if (password.length < 6) {
       alert('password length not enough');
-    } else if (!nameInput) {
+    } else if (!name) {
       alert('invalid input!');
     } else {
-      console.log(`${emailInput}、${password}、${nameInput}`);
-      api.makeAPIRequest('admin/auth/login', {
+      api.makeAPIRequest('admin/auth/register', {
         method: 'POST',
-        body: JSON.stringify({ emailInput, password, nameInput }),
+        body: JSON.stringify({ email, password, name }),
         headers: {
+          accept: 'application/json',
           'Content-Type': 'application/json',
         },
       })
@@ -72,14 +77,18 @@ export class SignupForm extends React.Component {
   render() {
     // const { thisState } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="form" onSubmit={this.handleSubmit}>
+        <h2>User Signup</h2>
         Email:
+        {/* eslint-disable-next-line react/destructuring-assignment */}
         <input type="text" value={this.state.email} onChange={this.handleChangeEmail} />
         Password:
-        <input type="password" value={this.state.name} onChange={this.handleChangeName} />
+        {/* eslint-disable-next-line react/destructuring-assignment */}
+        <input type="password" value={this.state.pwd} onChange={this.handleChangePwd} />
         Name:
-        <input type="text" value={this.state.pwd} onChange={this.handleChangePwd} />
-        <input type="submit" value="Submit" />
+        {/* eslint-disable-next-line react/destructuring-assignment */}
+        <input type="text" value={this.state.name} onChange={this.handleChangeName} />
+        <input type="submit" value="Submit" className="btn waves-effect waves-light" />
       </form>
     );
   }

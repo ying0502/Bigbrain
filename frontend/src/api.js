@@ -13,6 +13,7 @@ export class API {
   }
 
   makeAPIRequest(path, options) {
+    // console.log(`options: ${options.body}`);
     return getJSON(`${this.url}/${path}`, options);
   }
 }

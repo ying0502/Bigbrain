@@ -1,6 +1,8 @@
 import React from 'react';
-import { API } from './api';
+import { API } from '../api';
+import '../App.css';
 
+const myStorage = window.localStorage;
 const api = new API('http://localhost:5005');
 
 export class LoginForm extends React.Component {
@@ -17,12 +19,14 @@ export class LoginForm extends React.Component {
 
   handleSubmit(event) {
     const email = this.nameInput.value;
-    const { pwd } = this.state;
-    console.log(`${email}、${pwd}`);
+    // eslint-disable-next-line react/destructuring-assignment
+    const password = this.state.pwd;
+    console.log(`this is the data:${email}、${password}`);
     api.makeAPIRequest('admin/auth/login', {
       method: 'POST',
-      body: JSON.stringify({ email, pwd }),
+      body: JSON.stringify({ email, password }),
       headers: {
+        accept: 'application/json',
         'Content-Type': 'application/json',
       },
     })
@@ -30,6 +34,7 @@ export class LoginForm extends React.Component {
         console.log(data);
         if (data.token) {
           alert('successfully login!');
+          myStorage.setItem('token', data.token);
         } else {
           alert('Invalid input!');
         }
@@ -48,12 +53,13 @@ export class LoginForm extends React.Component {
   render() {
     const { thisState } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="form" onSubmit={this.handleSubmit}>
+        <h2>User Login</h2>
         Email:
         <input type="text" ref={(input) => { this.nameInput = input; }} />
         Password:
         <input type="password" value={{ thisState }.pwd} onChange={this.handleChange} />
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" className="btn waves-effect waves-light" />
       </form>
     );
   }

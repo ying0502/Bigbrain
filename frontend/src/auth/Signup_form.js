@@ -4,7 +4,7 @@ import '../App.css';
 
 const api = new API('http://localhost:5005');
 
-export class SignupForm extends React.Component {
+class SignupForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);

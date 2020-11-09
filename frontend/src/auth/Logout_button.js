@@ -3,7 +3,7 @@ import { API } from '../api';
 
 const api = new API('http://localhost:5005');
 
-export class LogoutButton extends React.Component {
+class LogoutButton extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);

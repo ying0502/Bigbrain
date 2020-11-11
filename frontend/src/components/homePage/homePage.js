@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Parallax } from 'react-parallax';
-import background1 from '../images/thumbnail_1.jpg';
+import background1 from '../../images/thumbnail_1.jpg';
 
 const HomePage = () => (
   <div>
@@ -43,7 +43,6 @@ const HomePage = () => (
 
             <p className="light">
               FindColla is a community of engineers, designers, project managers, and dreamers.
-
             </p>
           </div>
         </div>

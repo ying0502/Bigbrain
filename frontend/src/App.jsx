@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -6,29 +6,18 @@ import {
   Route,
   // Link,
 } from 'react-router-dom';
-import LoginForm from './auth/Login_form';
-import SignupForm from './auth/Signup_form';
-import Dashboard from './Create/Dashboard';
-import Narvbar from './homePage/narvbar';
-import HomePage from './homePage/homePage';
+import LoginForm from './components/auth/Login_form';
+import SignupForm from './components/auth/Signup_form';
+import Dashboard from './components/Create/Dashboard';
+import Narvbar from './components/homePage/narvbar';
+import HomePage from './components/homePage/homePage';
 
 // import { LogoutButton } from './Logout_button';
-
+/* eslint-disable react/destructuring-assignment */
 function App() {
-  const { loginStatus, setLoginStatus } = useState('');
-
-  function setLogin() {
-    // 如果有token
-    const token = localStorage.getItem('token');
-    if (token) {
-      setLoginStatus(token);
-    } else {
-      setLoginStatus(false);
-    }
-  }
   return (
     <Router>
-      <Narvbar loginStatus={loginStatus} setLogin={() => setLogin()} />
+      <Narvbar />
       <Route exact path="/"><HomePage /></Route>
       <Switch>
         <Route exact path="/login"><LoginForm /></Route>

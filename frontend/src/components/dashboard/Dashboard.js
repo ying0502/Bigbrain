@@ -1,34 +1,30 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import GameItem from './gameItem';
+import { getQuiz } from '../../actions/admin';
 
 class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      gameList: [],
-    };
-  }
-
-  async componentDidMount() {
-    const games = await axios.get('admin/quiz', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    });
-    console.log(games);
+  componentDidMount() {
+    this.props.getQuiz();
   }
 
   render() {
-    const { gameList } = this.state;
     return (
-      <>
-        <GameItem />
-        {gameList}
-      </>
+      this.props.quizzes.length > 0 ? this.props.quizzes.map((item) => (
+        <div key={item.id}>
+          {' '}
+          <GameItem item={item} />
+        </div>
+      )) : <div>no quiz now</div>
     );
   }
 }
 
-export default Dashboard;
+const mapStateToProps = (state) => ({
+  quizzes: state.admin.quizzes,
+});
+export default connect(mapStateToProps, { getQuiz })(
+  Dashboard,
+);

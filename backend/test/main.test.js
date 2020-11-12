@@ -267,6 +267,7 @@ describe('Test the root path', () => {
     const status = await singleSessionStatus();
     expect(status.active).toBe(true);
     expect(status.answerAvailable).toBe(false);
+    expect(status.isoTimeLastQuestionStarted).toBe(null);
     expect(status.position).toBe(-1);
     expect(status.questions).toMatchObject(QUESTIONS);
     expect(status.players).toMatchObject([]);
@@ -342,6 +343,7 @@ describe('Test the root path', () => {
       expect(status.position).toBe(parseInt(questionPosition, 10));
       expect(status.active).toBe(true);
       expect(status.answerAvailable).toBe(false);
+      expect(typeof status.isoTimeLastQuestionStarted).toBe('string');
     });
 
     test(`Players fail to submit no answers`, async () => {
@@ -381,6 +383,7 @@ describe('Test the root path', () => {
     expect(results.position).toBe(QUESTIONS.length);
     expect(results.active).toBe(false);
     expect(results.answerAvailable).toBe(false);
+    expect(typeof results.isoTimeLastQuestionStarted).toBe('string');
   });
 
   test('Ensure that the session appears in old sessions', async () => {

@@ -2,6 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
+import M from 'materialize-css';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
@@ -26,11 +27,12 @@ class LoginForm extends React.Component {
 
     await this.props.login({ email, password });
     if (this.props.isLoggedIn) {
-      alert(registerSuccess);
+      M.toast({ html: registerSuccess, classes: 'rounded' });
+      // alert(registerSuccess);
       this.setState({ redirectTag: true });
       setTimeout(this.setState({ redirectTag: false }));
       return null;
-    } alert(this.props.payload.error);
+    } M.toast({ html: this.props.payload.error, classes: 'rounded' });
     return null;
   }
 

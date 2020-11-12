@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 /* eslint-disable import/no-extraneous-dependencies */
 import { Redirect } from 'react-router';
+import M from 'materialize-css';
 import { register } from '../../actions/auth';
 
 const registerSuccess = 'Register Success';
@@ -24,11 +25,11 @@ class SignupForm extends React.Component {
     /* eslint-disable react/prop-types */
     await this.props.register({ name, email, password });
     if (this.props.isAuthenticated) {
-      alert(registerSuccess);
+      M.toast({ html: registerSuccess, classes: 'rounded' });
       this.setState({ redirectTag: true });
       setTimeout(this.setState({ redirectTag: false }));
       return null;
-    } alert(this.props.payload.error);
+    } M.toast({ html: this.props.payload.error, classes: 'rounded' });
     return null;
   }
 
@@ -38,7 +39,7 @@ class SignupForm extends React.Component {
 
   render() {
     /* eslint-disable no-trailing-spaces */
-    const { 
+    const {
       name, email, password, redirectTag,
     } = this.state;
     if (redirectTag) {

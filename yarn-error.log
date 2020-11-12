@@ -1,21 +1,20 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add redux-devtools-extension
+  D:\nodejs\node.exe D:\nodejs\node_global\node_modules\yarn\bin\yarn.js add redux
 
 PATH: 
-  /Library/Frameworks/Python.framework/Versions/3.9/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kyle/opt/anaconda3/bin:/Users/kyle/opt/anaconda3/condabin:/Library/Frameworks/Python.framework/Versions/3.9/bin
+  C:\MinGW\x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0\mingw64\bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Java\jdk1.8.0_251\bin;C:\Java\jre\bin;D:\Anaconda3\Library\bin;D:\spark-2.4.6-bin-hadoop2.7\bin;C:\winutils\bin\bin;C:\Windows\System32;C:\Users\69159\AppData\Local\Programs\Python\Python37\;C:\Users\69159\AppData\Local\Programs\Python\Python37\Scripts\;C:\Program Files\Git\cmd;D:\nodejs\;C:\Users\69159\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Python 3.7;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\69159\AppData\Local\Microsoft\WindowsApps;D:\clion\CLion 2019.3.2\bin;;D:\nodejs\node_global;
 
 Yarn version: 
   1.22.10
 
 Node version: 
-  12.16.3
+  14.13.0
 
 Platform: 
-  darwin x64
+  win32 x64
 
 Trace: 
-  Error: read ECONNRESET
-      at TLSWrap.onStreamRead (internal/stream_base_commons.js:205:27)
+  Error: EPERM: operation not permitted, unlink 'D:\Siying_Chen\UNSW_CourseResources\COMP6080\ass3\node_modules\react-redux\node_modules\.bin'
 
 npm manifest: 
   {
@@ -23,6 +22,7 @@ npm manifest:
     "version": "1.0.0",
     "description": "",
     "main": "server.js",
+    "proxy": "http://localhost:5005",
     "scripts": {
       "test": "jest backend/test/*",
       "lint": "eslint backend/src/*.js",
@@ -39,7 +39,11 @@ npm manifest:
       "express": "^4.17.1",
       "jsonwebtoken": "^8.5.1",
       "nodemon": "^2.0.6",
+      "react-modal": "^3.11.2",
+      "react-parallax": "^3.1.2",
+      "react-redux": "^7.2.2",
       "react-router-dom": "^5.2.0",
+      "redux-devtools-extension": "^2.13.8",
       "supertest": "^6.0.0",
       "swagger-ui-express": "^4.1.4"
     },
@@ -3204,6 +3208,11 @@ Lockfile:
       signal-exit "^3.0.2"
       strip-final-newline "^2.0.0"
   
+  exenv@^1.2.0:
+    version "1.2.2"
+    resolved "https://registry.npm.taobao.org/exenv/download/exenv-1.2.2.tgz#2ae78e85d9894158670b03d47bec1f03bd91bb9d"
+    integrity sha1-KueOhdmJQVhnCwPUe+wfA72Ru50=
+  
   exit@^0.1.2:
     version "0.1.2"
     resolved "https://registry.npm.taobao.org/exit/download/exit-0.1.2.tgz#0632638f8d877cc82107d30a0fff1a17cba1cd0c"
@@ -3785,7 +3794,7 @@ Lockfile:
       tiny-warning "^1.0.0"
       value-equal "^1.0.1"
   
-  hoist-non-react-statics@^3.1.0:
+  hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.3.2:
     version "3.3.2"
     resolved "https://registry.npm.taobao.org/hoist-non-react-statics/download/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
     integrity sha1-7OCsr3HWLClpwuxZ/v9CpLGoW0U=
@@ -5748,7 +5757,7 @@ Lockfile:
       kleur "^3.0.3"
       sisteransi "^1.0.5"
   
-  prop-types@^15.6.2:
+  prop-types@^15.5.10, prop-types@^15.6.2, prop-types@^15.7.2:
     version "15.7.2"
     resolved "https://registry.npm.taobao.org/prop-types/download/prop-types-15.7.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fprop-types%2Fdownload%2Fprop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
     integrity sha1-UsQedbjIfnK52TYOAga5ncv/psU=
@@ -5844,7 +5853,7 @@ Lockfile:
       minimist "^1.2.0"
       strip-json-comments "~2.0.1"
   
-  react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
+  react-is@^16.13.1, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
     version "16.13.1"
     resolved "https://registry.npm.taobao.org/react-is/download/react-is-16.13.1.tgz?cache=0&sync_timestamp=1603367522719&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-is%2Fdownload%2Freact-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
     integrity sha1-eJcppNw23imZ3BVt1sHZwYzqVqQ=
@@ -5853,6 +5862,37 @@ Lockfile:
     version "17.0.1"
     resolved "https://registry.npm.taobao.org/react-is/download/react-is-17.0.1.tgz?cache=0&sync_timestamp=1603367522719&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-is%2Fdownload%2Freact-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
     integrity sha1-WzUxvXamRaTJ+25pPtNkGeMwEzk=
+  
+  react-lifecycles-compat@^3.0.0:
+    version "3.0.4"
+    resolved "https://registry.npm.taobao.org/react-lifecycles-compat/download/react-lifecycles-compat-3.0.4.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-lifecycles-compat%2Fdownload%2Freact-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
+    integrity sha1-TxonOv38jzSIqMUWv9p4+HI1I2I=
+  
+  react-modal@^3.11.2:
+    version "3.11.2"
+    resolved "https://registry.npm.taobao.org/react-modal/download/react-modal-3.11.2.tgz#bad911976d4add31aa30dba8a41d11e21c4ac8a4"
+    integrity sha1-utkRl21K3TGqMNuopB0R4hxKyKQ=
+    dependencies:
+      exenv "^1.2.0"
+      prop-types "^15.5.10"
+      react-lifecycles-compat "^3.0.0"
+      warning "^4.0.3"
+  
+  react-parallax@^3.1.2:
+    version "3.1.2"
+    resolved "https://registry.npm.taobao.org/react-parallax/download/react-parallax-3.1.2.tgz#789fa6d70452507a6d9a43d495d3459038eeb028"
+    integrity sha1-eJ+m1wRSUHptmkPUldNFkDjusCg=
+  
+  react-redux@^7.2.2:
+    version "7.2.2"
+    resolved "https://registry.npm.taobao.org/react-redux/download/react-redux-7.2.2.tgz#03862e803a30b6b9ef8582dadcc810947f74b736"
+    integrity sha1-A4YugDowtrnvhYLa3MgQlH90tzY=
+    dependencies:
+      "@babel/runtime" "^7.12.1"
+      hoist-non-react-statics "^3.3.2"
+      loose-envify "^1.4.0"
+      prop-types "^15.7.2"
+      react-is "^16.13.1"
   
   react-router-dom@^5.2.0:
     version "5.2.0"
@@ -5956,6 +5996,11 @@ Lockfile:
     integrity sha1-m6dMAZsV02UnjS6Ru4xI17TULJ4=
     dependencies:
       picomatch "^2.2.1"
+  
+  redux-devtools-extension@^2.13.8:
+    version "2.13.8"
+    resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.8.tgz#37b982688626e5e4993ff87220c9bbb7cd2d96e1"
+    integrity sha512-8qlpooP2QqPtZHQZRhx3x3OP5skEV1py/zUdMY28WNAocbafxdG2tRD1MWE7sp8obGMNYuLWanhhQ7EQvT1FBg==
   
   regenerate-unicode-properties@^8.2.0:
     version "8.2.0"
@@ -7153,6 +7198,13 @@ Lockfile:
     integrity sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
     dependencies:
       makeerror "1.0.x"
+  
+  warning@^4.0.3:
+    version "4.0.3"
+    resolved "https://registry.npm.taobao.org/warning/download/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
+    integrity sha1-Fungd+uKhtavfWSqHgX9hbRnjKM=
+    dependencies:
+      loose-envify "^1.0.0"
   
   webidl-conversions@^5.0.0:
     version "5.0.0"

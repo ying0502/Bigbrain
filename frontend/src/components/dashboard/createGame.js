@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import M from 'materialize-css';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { createGame } from '../../actions/admin';
@@ -9,7 +10,7 @@ const Create = (props) => {
     e.preventDefault();
     await props.createGame({ name });
     if (props.quizId) {
-      alert('Create Quiz Success');
+      M.toast({ html: 'Create Quiz Success', classes: 'rounded' });
     }
   };
 

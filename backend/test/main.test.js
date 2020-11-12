@@ -267,6 +267,7 @@ describe('Test the root path', () => {
     const status = await singleSessionStatus();
     expect(status.active).toBe(true);
     expect(status.answerAvailable).toBe(false);
+    expect(status.isoTimeLastQuestionStarted).toBe(null);
     expect(status.position).toBe(-1);
     expect(status.questions).toMatchObject(QUESTIONS);
     expect(status.players).toMatchObject([]);
@@ -276,6 +277,11 @@ describe('Test the root path', () => {
                        Try Playing
   ***************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+});
+=======
+>>>>>>> a4a7d6893e40b5560abf25e768b958ed3a1bfe98
 
   test('Test player can\'t join without a name', async () => {
     const sessionId = await singleSessionId();
@@ -340,6 +346,7 @@ describe('Test the root path', () => {
       expect(status.position).toBe(parseInt(questionPosition, 10));
       expect(status.active).toBe(true);
       expect(status.answerAvailable).toBe(false);
+      expect(typeof status.isoTimeLastQuestionStarted).toBe('string');
     });
 
     test(`Players fail to submit no answers`, async () => {
@@ -379,6 +386,7 @@ describe('Test the root path', () => {
     expect(results.position).toBe(QUESTIONS.length);
     expect(results.active).toBe(false);
     expect(results.answerAvailable).toBe(false);
+    expect(typeof results.isoTimeLastQuestionStarted).toBe('string');
   });
 
   test('Ensure that the session appears in old sessions', async () => {
@@ -411,6 +419,10 @@ describe('Test the root path', () => {
   });
 
 });
+<<<<<<< HEAD
 =======
 });
 >>>>>>> 85659945c801da78bcaadba60e4e1f6d821ce3dc
+=======
+>>>>>>> 7f4563f4393d98fc7eacf3c4e09b477d997e21a5
+>>>>>>> a4a7d6893e40b5560abf25e768b958ed3a1bfe98

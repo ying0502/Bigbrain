@@ -1,6 +1,6 @@
 import request from 'supertest';
 import server from '../src/server';
-import { reset } from '../src/service';
+import { reset, } from '../src/service';
 
 const THUMBNAIL = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==';
 const QUESTIONS = [
@@ -68,7 +68,6 @@ const singleSessionId = async () => {
 };
 
 describe('Test the root path', () => {
-
   beforeAll(() => {
     reset();
   });
@@ -276,6 +275,7 @@ describe('Test the root path', () => {
   /***************************************************************
                        Try Playing
   ***************************************************************/
+<<<<<<< HEAD
 
   test('Test player can\'t join without a name', async () => {
     const sessionId = await singleSessionId();
@@ -411,3 +411,6 @@ describe('Test the root path', () => {
   });
 
 });
+=======
+});
+>>>>>>> 85659945c801da78bcaadba60e4e1f6d821ce3dc

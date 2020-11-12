@@ -6,30 +6,24 @@ import {
   Route,
   // Link,
 } from 'react-router-dom';
-import { LoginForm } from './auth/Login_form';
-import { SignupForm } from './auth/Signup_form';
-import { Dashboard } from './Create/Dashboard';
+import LoginForm from './components/auth/Login_form';
+import SignupForm from './components/auth/Signup_form';
+import Dashboard from './components/dashboard/Dashboard';
+import Narvbar from './components/homePage/narvbar';
+import HomePage from './components/homePage/homePage';
 
 // import { LogoutButton } from './Logout_button';
-
+/* eslint-disable react/destructuring-assignment */
 function App() {
   return (
     <Router>
-      <div>
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/login">
-            <LoginForm />
-          </Route>
-          <Route path="/register">
-            <SignupForm />
-          </Route>
-          <Route path="/dashboard">
-            <Dashboard token={localStorage.getItem('token')} />
-          </Route>
-        </Switch>
-      </div>
+      <Narvbar />
+      <Route exact path="/"><HomePage /></Route>
+      <Switch>
+        <Route exact path="/login"><LoginForm /></Route>
+        <Route exact path="/register"><SignupForm /></Route>
+        <Route exact path="/dashboard"><Dashboard /></Route>
+      </Switch>
     </Router>
   );
 }

@@ -46,3 +46,25 @@
   border-radius: 5px;
   padding: 5%;
 }
+
+.avatar:link {
+  color: #000000;
+} /* 未访问链接*/
+.avatar:visited {
+  color: white;
+} /* 已访问链接 */
+.avatar:hover {
+  color: pink;
+} /* 鼠标移动到链接上 */
+.avatar:active {
+  color: gray;
+} /* 鼠标点击时 */
+
+input[type="text"]:not(.browser-default):focus:not([readonly]),
+input[type="email"]:not(.browser-default):focus:not([readonly]),
+input[type="password"]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-color: #ec407a;
+  box-shadow: none;
+}
+

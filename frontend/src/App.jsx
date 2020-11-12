@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import LoginForm from './components/auth/Login_form';
 import SignupForm from './components/auth/Signup_form';
-import Dashboard from './components/Create/Dashboard';
+import Dashboard from './components/dashboard/Dashboard';
 import Narvbar from './components/homePage/narvbar';
 import HomePage from './components/homePage/homePage';
 

@@ -7,15 +7,7 @@ import {
   LOGOUT,
 } from './actionTypes';
 
-const config = {
-  headers: {
-    'Content-Type': 'application/json;charset=UTF-8',
-    'Access-Control-Allow-Origin': '*',
-  },
-};
-
-const targetUrl = 'http://localhost:5005/';
-
+import { targetUrl, config } from '../utils/utils';
 // REGISTER USER
 const register = ({
   name,
@@ -27,17 +19,13 @@ const register = ({
     email,
     password,
   });
-  console.log(body);
-
   try {
     const res = await axios.post(`${targetUrl}admin/auth/register`, body, config);
-    console.log(res.data);
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data,
     });
   } catch (err) {
-    console.log(err.response);
     dispatch({
       type: REGISTER_FAIL,
       payload: err.response.data,
@@ -54,17 +42,14 @@ const login = ({
     email,
     password,
   });
-  console.log(body);
 
   try {
     const res = await axios.post(`${targetUrl}admin/auth/login`, body, config);
-    console.log(res.data);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
   } catch (err) {
-    console.log(err.response);
     dispatch({
       type: LOGIN_FAIL,
       payload: err.response.data,
@@ -77,4 +62,6 @@ const logOut = () => (dispatch) => {
   dispatch({ type: LOGOUT });
 };
 
-export { register, login, logOut };
+export {
+  register, login, logOut,
+};

@@ -2375,6 +2375,11 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+classnames@^2.2.6:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
+  integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
+
 cli-boxes@^2.2.0:
   version "2.2.1"
   resolved "https://registry.npm.taobao.org/cli-boxes/download/cli-boxes-2.2.1.tgz#ddd5035d25094fce220e9cab40a45840a440318f"
@@ -5788,6 +5793,13 @@ react-is@^17.0.1:
   version "17.0.1"
   resolved "https://registry.npm.taobao.org/react-is/download/react-is-17.0.1.tgz?cache=0&sync_timestamp=1603367522719&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-is%2Fdownload%2Freact-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha1-WzUxvXamRaTJ+25pPtNkGeMwEzk=
+
+react-materialize@^3.9.3:
+  version "3.9.3"
+  resolved "https://registry.yarnpkg.com/react-materialize/-/react-materialize-3.9.3.tgz#7dc8c71ca103b1560395807b057d93f4afe619d8"
+  integrity sha512-Xyr1us1eXJQDp1UTs9CCIn/YoXPp1P8BA1oc17sUWQtXlAJg5/H20s185QXT4fCWFBwDAbnSQnIwGLkMb/lsRQ==
+  dependencies:
+    classnames "^2.2.6"
 
 react-router-dom@^5.2.0:
   version "5.2.0"

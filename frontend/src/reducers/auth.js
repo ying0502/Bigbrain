@@ -6,6 +6,8 @@ import {
   LOGOUT,
 } from '../actions/actionTypes';
 
+import { targetUrl, config } from '../utils/utils';
+
 const initialState = {
   token: null,
   isAuthenticated: null,
@@ -29,9 +31,12 @@ export default function (state = initialState, action) {
       };
 
     case LOGIN_SUCCESS:
+      localStorage.setItem('token', payload.token);
+      console.log(payload);
       return { ...state, ...payload, isLoggedIn: true };
 
     case LOGOUT:
+      localStorage.removeItem('token');
       return {
         ...state, token: null, isLoggedIn: false,
       };

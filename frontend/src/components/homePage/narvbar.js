@@ -1,13 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-/* eslint-disable import/no-extraneous-dependencies */
-import { logOut } from '../../actions/auth';
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
-// eslint-disable-next-line no-shadow
+/* eslint-disable import/no-extraneous-dependencies */
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Modal from 'react-modal';
+import { logOut } from '../../actions/auth';
+import Create from '../dashboard/createGame';
+import { customStyles } from '../../utils/utils';
+
+Modal.setAppElement('#root');
+/* eslint-disable-next-line no-shadow */
 const Narvbar = ({ isLoggedIn, logOut }) => {
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   if (isLoggedIn) {
     return (
       <nav className="darken-2 nav-wrapper blue-grey lighten-1 navbar-css">
@@ -15,11 +32,14 @@ const Narvbar = ({ isLoggedIn, logOut }) => {
           Ass3 cutest cats
         </Link>
         <ul className="right">
-          <li>
-            <Link to="/register" className="avatar">
-              create
-            </Link>
-          </li>
+          <li className="avatar" onClick={openModal}>create</li>
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            style={customStyles}
+          >
+            <Create />
+          </Modal>
           <li>
             <Link to="/" onClick={logOut} className="avatar">
               logout
@@ -30,7 +50,7 @@ const Narvbar = ({ isLoggedIn, logOut }) => {
     );
   }
   return (
-    <nav className="darken-2 nav-wrapper blue-grey lighten-1 navbar-css">
+    <nav className="darken-2 blue-grey">
       <Link to="/" className="brand-logo avatar">
         Ass3 cutest cats
       </Link>

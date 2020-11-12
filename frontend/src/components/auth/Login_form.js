@@ -1,6 +1,9 @@
+// eslint-disable-next-line react/destructuring-assignment
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-/* eslint-disable import/no-extraneous-dependencies */
 import { Redirect } from 'react-router';
 import { login } from '../../actions/auth';
 
@@ -18,11 +21,9 @@ class LoginForm extends React.Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     const email = this.nameInput.value;
-    // eslint-disable-next-line react/destructuring-assignment
     const password = this.state.pwd;
     console.log(`this is the data:${email}、${password}`);
-    /* eslint-disable react/destructuring-assignment */
-    /* eslint-disable react/prop-types */
+
     await this.props.login({ email, password });
     if (this.props.isLoggedIn) {
       alert(registerSuccess);

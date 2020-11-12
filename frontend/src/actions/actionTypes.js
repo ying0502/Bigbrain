@@ -5,3 +5,6 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 
 export const LOGOUT = 'LOGOUT';
+
+export const CREATE_GAME = 'CREATE_GAME';
+export const CREATE_GAME_FAIL = 'CREATE_GAME_FAIL';

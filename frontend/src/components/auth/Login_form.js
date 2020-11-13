@@ -32,7 +32,8 @@ class LoginForm extends React.Component {
       this.setState({ redirectTag: true });
       setTimeout(this.setState({ redirectTag: false }));
       return null;
-    } M.toast({ html: this.props.payload.error, classes: 'rounded' });
+    }
+    M.toast({ html: 'login fail', classes: 'rounded' });
     return null;
   }
 

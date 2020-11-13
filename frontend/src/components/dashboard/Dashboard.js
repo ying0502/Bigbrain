@@ -11,7 +11,7 @@ class Dashboard extends React.Component {
   }
 
   async componentDidMount() {
-    const games = await axios.get('admin/quiz', {
+    const games = await axios.get('http://localhost:5005/admin/quiz', {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`,

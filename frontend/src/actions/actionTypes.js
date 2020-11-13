@@ -8,3 +8,5 @@ export const LOGOUT = 'LOGOUT';
 
 export const CREATE_GAME = 'CREATE_GAME';
 export const CREATE_GAME_FAIL = 'CREATE_GAME_FAIL';
+
+export const GET_QUIZ = 'GET_QUIZ';

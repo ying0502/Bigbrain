@@ -23,6 +23,8 @@ function App() {
         <Route exact path="/login"><LoginForm /></Route>
         <Route exact path="/register"><SignupForm /></Route>
         <Route exact path="/dashboard"><Dashboard /></Route>
+        <Route exact path="/game/427398257/" />
+        <Route exact path="/game/862040729/" />
       </Switch>
     </Router>
   );

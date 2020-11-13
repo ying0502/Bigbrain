@@ -68,3 +68,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
   box-shadow: none;
 }
 
+.card_display{
+  margin: auto;
+}
+

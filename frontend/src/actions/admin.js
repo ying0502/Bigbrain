@@ -1,11 +1,12 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
+// import { Route } from 'react-router-dom';
 import {
   CREATE_GAME,
   CREATE_GAME_FAIL,
   GET_QUIZ,
+  DELETE_GAME,
 } from './actionTypes';
-
 import { targetUrl, Config } from '../utils/utils';
 
 // createGame
@@ -30,10 +31,27 @@ const createGame = ({
   }
 };
 
+// DeleteGame
+const DeleteGame = ({
+  ID,
+}) => async (dispatch) => {
+  console.log(ID);
+  try {
+    const res = await axios.delete(`${targetUrl}admin/quiz/${ID}`, Config);
+    dispatch({
+      type: DELETE_GAME,
+      payload: res.data,
+    });
+    console.log(res.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // get QUIZ
 const getQuiz = () => async (dispatch) => {
   try {
-    const res = await axios.get(`${targetUrl}admin/quiz`, Config);
+    const res = await axios.get(`${targetUrl}admin/quiz/`, Config);
     console.log(res.data);
     dispatch({
       type: GET_QUIZ,
@@ -47,4 +65,5 @@ const getQuiz = () => async (dispatch) => {
 export {
   createGame,
   getQuiz,
+  DeleteGame,
 };

@@ -11,18 +11,27 @@ import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import { logOut } from '../../actions/auth';
 import Create from '../dashboard/createGame';
+import Delete from '../dashboard/deleteGame';
 import { customStyles } from '../../utils/utils';
 
 Modal.setAppElement('#root');
 /* eslint-disable-next-line no-shadow */
 const Narvbar = ({ isLoggedIn, logOut }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen1, setIsOpen1] = useState(false);
   const openModal = () => {
     setIsOpen(true);
+  };
+  const openModal1 = () => {
+    setIsOpen1(true);
   };
 
   const closeModal = () => {
     setIsOpen(false);
+  };
+
+  const closeModal1 = () => {
+    setIsOpen1(false);
   };
 
   if (isLoggedIn) {
@@ -32,6 +41,14 @@ const Narvbar = ({ isLoggedIn, logOut }) => {
           Ass3 cutest cats
         </Link>
         <ul className="right">
+          <li className="avatar" onClick={openModal1} style={{ margin: '0 10px' }}>delete</li>
+          <Modal
+            isOpen={modalIsOpen1}
+            onRequestClose={closeModal1}
+            style={customStyles}
+          >
+            <Delete />
+          </Modal>
           <li className="avatar" onClick={openModal}>create</li>
           <Modal
             isOpen={modalIsOpen}

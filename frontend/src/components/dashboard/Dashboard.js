@@ -8,12 +8,13 @@ import { getQuiz } from '../../actions/admin';
 class Dashboard extends React.Component {
   componentDidMount() {
     this.props.getQuiz();
+    // console.log(this.props.quizzes.length);
   }
 
   render() {
     return (
       this.props.quizzes.length > 0 ? this.props.quizzes.map((item) => (
-        <div key={item.id}>
+        <div key={item.id} style={{ margin: 'auto' }}>
           {' '}
           <GameItem item={item} />
         </div>

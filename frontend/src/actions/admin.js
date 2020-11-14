@@ -5,6 +5,7 @@ import {
   CREATE_GAME,
   CREATE_GAME_FAIL,
   GET_QUIZ,
+  GET_QUIZ_DETAIL,
   DELETE_GAME,
 } from './actionTypes';
 import { targetUrl, Config } from '../utils/utils';
@@ -62,8 +63,23 @@ const getQuiz = () => async (dispatch) => {
   }
 };
 
+// get quizDetail
+const getQuizDetail = (quizid) => async (dispatch) => {
+  try {
+    const res = await axios.get(`${targetUrl}admin/quiz/${quizid}`, Config);
+    console.log(res.data);
+    dispatch({
+      type: GET_QUIZ_DETAIL,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export {
   createGame,
   getQuiz,
   DeleteGame,
+  getQuizDetail,
 };

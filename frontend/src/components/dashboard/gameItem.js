@@ -3,6 +3,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import timeTransform from '../../utils/utils';
+import { getQuizDetail } from '../../actions/admin';
 
 class GameItem extends React.Component {
   constructor(props) {
@@ -19,11 +20,10 @@ class GameItem extends React.Component {
             <span className="card-image" />
             <div className="card-content">
               <span className="card-title">{this.props.item.name}</span>
-              <img src={this.props.item.thumbnail} alt="no thumbnail please edit" />
+              <img src={this.props.item.thumbnail} alt="game_thumbnail" />
               <p>
-                id:
-                {' '}
-                {this.props.item.id}
+                Question Number:
+                {this.props.item.oldSessions.length}
                 {a}
               </p>
               <p>
@@ -31,8 +31,11 @@ class GameItem extends React.Component {
               </p>
             </div>
             <div className="card-action">
+              <button className="btn" type="button" style={{ marginRight: '5px', backgroundColor: '#00838f' }}>
+                {this.props.item.active == null ? 'start' : 'close'}
+              </button>
               <Link to={`/edit/${this.props.item.id}/`} className="avatar">
-                <button className="btn" type="button">edit game</button>
+                <button className="btn" type="button" onClick={getQuizDetail(this.props.item.id)}>edit</button>
               </Link>
               <span className="right">
                 {timeTransform(this.props.item.createdAt)}

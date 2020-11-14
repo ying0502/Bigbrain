@@ -5,6 +5,7 @@ import {
   CREATE_GAME,
   CREATE_GAME_FAIL,
   GET_QUIZ,
+  GET_QUIZ_DETAIL,
   DELETE_GAME,
   GET_EACH_QUIZ,
 } from './actionTypes';
@@ -77,9 +78,46 @@ const getEachQuiz = (quizId) => async (dispatch) => {
     //
   }
 };
+// get quizDetail
+const getQuizDetail = (quizid) => async (dispatch) => {
+  try {
+    const res = await axios.get(`${targetUrl}admin/quiz/${quizid}`, Config);
+    console.log(res.data);
+    dispatch({
+      type: GET_QUIZ_DETAIL,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.warn(err);
+  }
+};
+
+// start a new session
+const startNewSession = (quizid) => async () => {
+  try {
+    const res = await axios.post(`${targetUrl}admin/quiz/${quizid}/start`, Config);
+    console.log(res.data);
+  } catch (err) {
+    console.warn(err);
+  }
+};
+
+// end a session
+const endSession = (quizid) => async () => {
+  try {
+    const res = await axios.post(`${targetUrl}admin/quiz/${quizid}/end`, Config);
+    console.log(res.data);
+  } catch (err) {
+    console.warn(err);
+  }
+};
+
 export {
   createGame,
   getQuiz,
   DeleteGame,
   getEachQuiz,
+  getQuizDetail,
+  startNewSession,
+  endSession,
 };

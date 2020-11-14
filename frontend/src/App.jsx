@@ -6,6 +6,7 @@ import {
   Route,
   // Link,
 } from 'react-router-dom';
+import QuestionPage from './components/dashboard/qustionPage';
 import LoginForm from './components/auth/Login_form';
 import SignupForm from './components/auth/Signup_form';
 import Dashboard from './components/dashboard/Dashboard';
@@ -25,6 +26,10 @@ function App() {
         <Route exact path="/register"><SignupForm /></Route>
         <Route exact path="/dashboard"><Dashboard /></Route>
         <Route exact path="/edit/:id" component={EditGame} />
+        <Route exact path="/edit/:qid/:qid" component={QuestionPage} />
+        <Route exact path="/game/427398257/" />
+        <Route exact path="/game/862040729/" />
+
       </Switch>
     </Router>
   );

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Parallax } from 'react-parallax';
+
 import background1 from '../../images/thumbnail_1.jpg';
 
 const HomePage = () => (
+
   <div>
     <div className="parallax-container">
       <Parallax bgImage={background1} bgImageAlt="the cat" strength={800}>

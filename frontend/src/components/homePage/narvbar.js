@@ -55,6 +55,11 @@ const Narvbar = ({ isLoggedIn, logOut }) => {
             <Create />
           </Modal>
           <li>
+            <Link to="/dashboard" className="avatar">
+              dashboard
+            </Link>
+          </li>
+          <li>
             <Link to="/" onClick={logOut} className="avatar">
               logout
             </Link>

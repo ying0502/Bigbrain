@@ -19,10 +19,11 @@ class GameItem extends React.Component {
             <span className="card-image" />
             <div className="card-content">
               <span className="card-title">{this.props.item.name}</span>
-              <img src="images/thumbnail_1.jpg" alt="game_thumbnail" />
+              <img src={this.props.item.thumbnail} alt="no thumbnail please edit" />
               <p>
-                Question Number: 10
+                id:
                 {' '}
+                {this.props.item.id}
                 {a}
               </p>
               <p>
@@ -30,8 +31,8 @@ class GameItem extends React.Component {
               </p>
             </div>
             <div className="card-action">
-              <Link to={`/game/${this.props.item.id}/`} className="avatar">
-                <button className="btn" type="button">edit</button>
+              <Link to={`/edit/${this.props.item.id}/`} className="avatar">
+                <button className="btn" type="button">edit game</button>
               </Link>
               <span className="right">
                 {timeTransform(this.props.item.createdAt)}

@@ -73,7 +73,27 @@ const getQuizDetail = (quizid) => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
-    console.log(err);
+    console.warn(err);
+  }
+};
+
+// start a new session
+const startNewSession = (quizid) => async () => {
+  try {
+    const res = await axios.post(`${targetUrl}admin/quiz/${quizid}/start`, Config);
+    console.log(res.data);
+  } catch (err) {
+    console.warn(err);
+  }
+};
+
+// end a session
+const endSession = (quizid) => async () => {
+  try {
+    const res = await axios.post(`${targetUrl}admin/quiz/${quizid}/end`, Config);
+    console.log(res.data);
+  } catch (err) {
+    console.warn(err);
   }
 };
 
@@ -82,4 +102,6 @@ export {
   getQuiz,
   DeleteGame,
   getQuizDetail,
+  startNewSession,
+  endSession,
 };

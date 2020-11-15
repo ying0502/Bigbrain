@@ -78,24 +78,52 @@ const getQuizDetail = (quizid) => async (dispatch) => {
 };
 
 // start a new session
-const startNewSession = (quizid) => async () => {
-  try {
-    const res = await axios.post(`${targetUrl}admin/quiz/${quizid}/start`, Config);
-    console.log(res.data);
-  } catch (err) {
-    console.warn(err);
-  }
-};
+// async function startNewSession(quizid) {
+//   try {
+//     const res = await axios.post(`${targetUrl}admin/quiz/${quizid}/start`, Config);
+//     console.log(res.data);
+//   } catch (err) {
+//     // console.log(Config);
+//     console.warn(err.message);
+//   }
+// }
+
+function startNewSession(quizId) {
+  fetch(`${targetUrl}admin/quiz/${quizId}/start`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  }).then((data) => {
+    console.log(data);
+  }).catch((err) => {
+    console.log(err);
+  });
+}
 
 // end a session
-const endSession = (quizid) => async () => {
-  try {
-    const res = await axios.post(`${targetUrl}admin/quiz/${quizid}/end`, Config);
-    console.log(res.data);
-  } catch (err) {
-    console.warn(err);
-  }
-};
+// const endSession = (quizid) => async () => {
+//   try {
+//     const res = await axios.post(`${targetUrl}admin/quiz/${quizid}/end`, Config);
+//     console.log(res.data);
+//   } catch (err) {
+//     console.warn(err.message);
+//   }
+// };
+function endSession(quizId) {
+  fetch(`${targetUrl}admin/quiz/${quizId}/end`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  }).then((data) => {
+    console.log(data);
+  }).catch((err) => {
+    console.log(err);
+  });
+}
 
 export {
   createGame,

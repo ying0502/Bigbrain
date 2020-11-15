@@ -3,7 +3,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import timeTransform from '../../utils/utils';
-import { getQuizDetail } from '../../actions/admin';
+import { endSession, getQuizDetail, startNewSession } from '../../actions/admin';
 
 class GameItem extends React.Component {
   constructor(props) {
@@ -31,8 +31,14 @@ class GameItem extends React.Component {
               </p>
             </div>
             <div className="card-action">
-              <button className="btn" type="button" style={{ marginRight: '5px', backgroundColor: '#00838f' }}>
-                {this.props.item.active == null ? 'start' : 'close'}
+              <button
+                /* eslint-disable-next-line max-len */
+                onClick={() => (this.props.item.active == null ? startNewSession(this.props.item.id) : endSession(this.props.item.id))}
+                className="btn"
+                type="button"
+                style={{ marginRight: '5px', backgroundColor: '#00838f' }}
+              >
+                {this.props.item.active == null ? 'start the game' : 'close the game'}
               </button>
               <Link to={`/game/${this.props.item.id}/`} className="avatar">
                 <button className="btn" type="button" onClick={getQuizDetail(this.props.item.id)}>edit</button>

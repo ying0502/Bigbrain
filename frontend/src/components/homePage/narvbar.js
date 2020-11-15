@@ -37,9 +37,6 @@ const Narvbar = ({ isLoggedIn, logOut }) => {
   if (isLoggedIn) {
     return (
       <nav className="darken-2 nav-wrapper blue-grey lighten-1 navbar-css">
-        <Link to="/" className="brand-logo avatar">
-          Ass3 cutest cats
-        </Link>
         <ul className="right">
           <li className="avatar" onClick={openModal1} style={{ margin: '0 10px' }}>delete</li>
           <Modal
@@ -57,6 +54,11 @@ const Narvbar = ({ isLoggedIn, logOut }) => {
           >
             <Create />
           </Modal>
+          <li>
+            <Link to="/dashboard" className="avatar">
+              dashboard
+            </Link>
+          </li>
           <li>
             <Link to="/" onClick={logOut} className="avatar">
               logout

@@ -12,6 +12,7 @@ import SignupForm from './components/auth/Signup_form';
 import Dashboard from './components/dashboard/Dashboard';
 import Narvbar from './components/homePage/narvbar';
 import HomePage from './components/homePage/homePage';
+import EditGame from './components/dashboard/editGame';
 
 // import { LogoutButton } from './Logout_button';
 /* eslint-disable react/destructuring-assignment */
@@ -24,9 +25,11 @@ function App() {
         <Route exact path="/login"><LoginForm /></Route>
         <Route exact path="/register"><SignupForm /></Route>
         <Route exact path="/dashboard"><Dashboard /></Route>
+        <Route exact path="/edit/:id" component={EditGame} />
+        <Route exact path="/edit/:qid/:qid" component={QuestionPage} />
         <Route exact path="/game/427398257/" />
         <Route exact path="/game/862040729/" />
-        <Route exact path="/game/862040729/11223"><QuestionPage /></Route>
+
       </Switch>
     </Router>
   );

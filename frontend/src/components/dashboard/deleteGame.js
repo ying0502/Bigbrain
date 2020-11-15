@@ -1,13 +1,14 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { DeleteGame } from '../../actions/admin';
 
-const Delete = () => {
+const Delete = (props) => {
   const [ID, setID] = useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('try to submit');
-    DeleteGame({ ID });
+    await props.DeleteGame({ ID });
   };
   const handleChange = (e) => {
     setID(e.target.value);
@@ -35,4 +36,6 @@ const Delete = () => {
   );
 };
 
-export default Delete;
+export default connect(null, { DeleteGame })(
+  Delete,
+);

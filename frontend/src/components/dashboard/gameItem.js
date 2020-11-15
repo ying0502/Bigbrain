@@ -24,7 +24,7 @@ class GameItem extends React.Component {
               <p>
                 Question Number:
                 {this.props.item.oldSessions.length}
-                { a }
+                {a}
               </p>
               <p>
                 Total time to complete: 1 min
@@ -40,7 +40,7 @@ class GameItem extends React.Component {
               >
                 {this.props.item.active == null ? 'start the game' : 'close the game'}
               </button>
-              <Link to={`/game/${this.props.item.id}/`} className="avatar">
+              <Link to={`/edit/${this.props.item.id}/`} className="avatar">
                 <button className="btn" type="button" onClick={getQuizDetail(this.props.item.id)}>edit</button>
               </Link>
               <span className="right">

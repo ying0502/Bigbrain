@@ -12,6 +12,7 @@ export default function QuestionPage() {
   const [answer3, setAnswer3] = React.useState('');
   const [answer4, setAnswer4] = React.useState('');
 
+  // 得到数据后是不是可以按照hayden的格式造出reqdata然后调put/admin/quiz/{quizid}
   function Payload() {
     console.log(name, duration, points, questionType,
       videoLink, correctAnswer, answer1, answer2,
@@ -76,6 +77,7 @@ export default function QuestionPage() {
           }}
         />
       </div>
+      {/* 这个有要上传文件吗 */}
       <form action="#">
         <div className="file-field input-field">
           <div className="btn">
@@ -133,7 +135,7 @@ export default function QuestionPage() {
       </div>
     </>
   );
-
+  // 多选那里还是有点问题
   if (questionType === '1') {
     return (
       <div className="form">
@@ -159,7 +161,7 @@ export default function QuestionPage() {
 
   return (
     <div className="form">
-      {pagePrior }
+      {pagePrior}
       <div className="input-field col s12">
         <select
           multiple

@@ -7,6 +7,7 @@ import {
   GET_QUIZ,
   GET_QUIZ_DETAIL,
   DELETE_GAME,
+  GET_EACH_QUIZ,
 } from './actionTypes';
 import { targetUrl, Config } from '../utils/utils';
 
@@ -63,6 +64,20 @@ const getQuiz = () => async (dispatch) => {
   }
 };
 
+// get QUIZ
+const getEachQuiz = (quizId) => async (dispatch) => {
+  try {
+    console.log(quizId);
+    const res = await axios.get(`${targetUrl}admin/quiz/${quizId}`, Config);
+    console.log(res.data);
+    dispatch({
+      type: GET_EACH_QUIZ,
+      payload: res.data,
+    });
+  } catch (err) {
+    //
+  }
+};
 // get quizDetail
 const getQuizDetail = (quizid) => async (dispatch) => {
   try {
@@ -129,6 +144,7 @@ export {
   createGame,
   getQuiz,
   DeleteGame,
+  getEachQuiz,
   getQuizDetail,
   startNewSession,
   endSession,

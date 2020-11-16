@@ -47,6 +47,13 @@
   padding: 5%;
 }
 
+.pageConfig{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .avatar:link {
   color: #000000;
 } /* 未访问链接*/

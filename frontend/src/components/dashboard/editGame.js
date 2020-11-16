@@ -43,24 +43,42 @@ class EditGame extends React.Component {
   renderNoQuestions() {
     console.log(this.state.questions);
     return (
-      <div>
-        <div>You have no questions right now, you can add or delete questions</div>
-        current question number:
-        {this.state.question}
-        <div className="row">
-          <form className="col s6" onSubmit={this.submit}>
-            {this.state.questions.map(() => (
-              <div className="row">
-                <div className="input-field col s12">
-                  {/* 可以想想placeholder放什么 */}
-                  <input id="input_text" type="text" data-length="30" placeholder="question detail" />
-                  <button type="button" className="btn" onClick={this.handleAdd} style={{ marginRight: '10px' }}>+</button>
-                  <button type="button" className="btn" onClick={this.handleDelete} style={{ marginRight: '10px' }}>-</button>
-                  <Link to={`/edit/${this.props.match.params.id}/${this.state.question}`} className="avatar"><button type="button" className="btn">edit</button></Link>
-                </div>
+      <div className="pageConfig">
+        <div>
+          <h2>Game Edit</h2>
+          New Name:
+          <input style={{ width: '350px' }} placeholder="Change the name of current quiz" id="New_name_1" type="text" className="validate" />
+          <form action="#">
+            <div className="file-field input-field">
+              <div className="btn">
+                <span>Update the thumbnail</span>
+                <input type="file" multiple />
               </div>
-            ))}
+              <div className="file-path-wrapper">
+                <input style={{ width: '350px' }} id="thumbnailUpdate1" type="text" placeholder="only *.jpg and *.png will be accepted" />
+              </div>
+            </div>
           </form>
+          <div>You have no questions right now, you can add or delete questions</div>
+          <div className="row">
+            <form className="col s6" onSubmit={this.submit}>
+              {this.state.questions.map(() => (
+                <div className="row">
+                  <div className="input-field col s12">
+                    {/* 可以想想placeholder放什么 */}
+                    <input id="input_text" type="text" data-length="30" placeholder="question detail" />
+                    <button type="button" className="btn" onClick={this.handleAdd} style={{ marginRight: '10px', backgroundColor: '#e53935' }}>+</button>
+                    <button type="button" className="btn" onClick={this.handleDelete} style={{ marginRight: '10px', backgroundColor: '#01579b' }}>-</button>
+                    <Link to={`/edit/${this.props.match.params.id}/${this.state.question}`} className="avatar"><button type="button" className="btn">edit</button></Link>
+                  </div>
+                </div>
+              ))}
+            </form>
+          </div>
+          <button className="btn waves-effect waves-light" type="submit" name="action" style={{ backgroundColor: '#00838f' }}>
+            Submit your input
+            <i className="material-icons right">send</i>
+          </button>
         </div>
       </div>
     );
@@ -69,6 +87,20 @@ class EditGame extends React.Component {
   renderQuestions() {
     return (
       <div>
+        <h2>Game Edit</h2>
+        New Name:
+        <input style={{ width: '250px' }} placeholder="Change the name of current quiz if you wanna to " id="New_name_2" type="text" />
+        <form action="#">
+          <div className="file-field input-field">
+            <div className="btn">
+              <span>Update the thumbnail</span>
+              <input type="file" multiple />
+            </div>
+            <div className="file-path-wrapper">
+              <input style={{ width: '260px' }} id="thumbnailUpdate2" type="text" placeholder="only *.jpg and *.png will be accepted" />
+            </div>
+          </div>
+        </form>
         <div>
           current question number:
           {this.state.questions.length}
@@ -88,7 +120,10 @@ class EditGame extends React.Component {
             </form>
           </div>
         </div>
-
+        <button className="btn waves-effect waves-light" type="submit" name="action">
+          Submit your input
+          <i className="material-icons right">send</i>
+        </button>
       </div>
     );
   }

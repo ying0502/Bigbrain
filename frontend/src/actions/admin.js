@@ -1,11 +1,13 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
+import M from 'materialize-css';
 // import { Route } from 'react-router-dom';
+// import Modal from 'react-modal';
+// import React from 'react';
 import {
   CREATE_GAME,
   CREATE_GAME_FAIL,
   GET_QUIZ,
-  GET_QUIZ_DETAIL,
   DELETE_GAME,
   GET_EACH_QUIZ,
 } from './actionTypes';
@@ -64,7 +66,7 @@ const getQuiz = () => async (dispatch) => {
   }
 };
 
-// get QUIZ
+// get EachQuiZ
 const getEachQuiz = (quizId) => async (dispatch) => {
   try {
     console.log(quizId);
@@ -78,32 +80,9 @@ const getEachQuiz = (quizId) => async (dispatch) => {
     //
   }
 };
-// get quizDetail
-const getQuizDetail = (quizid) => async (dispatch) => {
-  try {
-    const res = await axios.get(`${targetUrl}admin/quiz/${quizid}`, Config);
-    console.log(res.data);
-    dispatch({
-      type: GET_QUIZ_DETAIL,
-      payload: res.data,
-    });
-  } catch (err) {
-    console.warn(err);
-  }
-};
 
-// start a new session
-// async function startNewSession(quizid) {
-//   try {
-//     const res = await axios.post(`${targetUrl}admin/quiz/${quizid}/start`, Config);
-//     console.log(res.data);
-//   } catch (err) {
-//     // console.log(Config);
-//     console.warn(err.message);
-//   }
-// }
-
-function startNewSession(quizId) {
+// start new session
+function StartNewSession(quizId) {
   fetch(`${targetUrl}admin/quiz/${quizId}/start`, {
     method: 'POST',
     headers: {
@@ -112,20 +91,44 @@ function startNewSession(quizId) {
     },
   }).then((data) => {
     console.log(data);
+    if (data.status === 200) {
+      M.toast({
+        html: 'create session success',
+        classes: 'rounded',
+      });
+      fetch(`${targetUrl}admin/quiz/${quizId}`, {
+        method: 'Get',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }).then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          M.toast({
+            html: `your current session ID is ${res.active}`,
+            classes: 'rounded',
+          });
+        }).catch((err) => {
+          console.log(err);
+        });
+    } else {
+      M.toast({
+        html: 'create session fail',
+        classes: 'rounded',
+      });
+    }
   }).catch((err) => {
     console.log(err);
+    M.toast({
+      html: 'fetch fail',
+      classes: 'rounded',
+    });
   });
 }
 
 // end a session
-// const endSession = (quizid) => async () => {
-//   try {
-//     const res = await axios.post(`${targetUrl}admin/quiz/${quizid}/end`, Config);
-//     console.log(res.data);
-//   } catch (err) {
-//     console.warn(err.message);
-//   }
-// };
 function endSession(quizId) {
   fetch(`${targetUrl}admin/quiz/${quizId}/end`, {
     method: 'POST',
@@ -135,8 +138,53 @@ function endSession(quizId) {
     },
   }).then((data) => {
     console.log(data);
+    if (data.status === 200) {
+      M.toast({
+        html: 'End session Success',
+        classes: 'rounded',
+      });
+    } else {
+      M.toast({
+        html: 'End session fail',
+        classes: 'rounded',
+      });
+    }
   }).catch((err) => {
     console.log(err);
+    M.toast({
+      html: 'Fetch fail',
+      classes: 'rounded',
+    });
+  });
+}
+
+// create new question
+function createNewQuestion(quizId, updatedQuestion) {
+  fetch(`${targetUrl}admin/quiz/${quizId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+    body: JSON.stringify({
+      questions: [updatedQuestion],
+    }),
+  }).then((result) => {
+    console.log(result);
+    if (result.status === 200) {
+      M.toast({
+        html: 'Create question Success',
+        classes: 'rounded',
+      });
+    } else {
+      M.toast({
+        html: 'Create question fail',
+        classes: 'rounded',
+      });
+    }
+  }).catch((err) => {
+    console.log(err);
+    M.toast({ html: 'Fetch fail', classes: 'rounded' });
   });
 }
 
@@ -145,7 +193,7 @@ export {
   getQuiz,
   DeleteGame,
   getEachQuiz,
-  getQuizDetail,
-  startNewSession,
+  StartNewSession,
   endSession,
+  createNewQuestion,
 };

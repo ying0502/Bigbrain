@@ -1,23 +1,37 @@
 import React from 'react';
+import M from 'materialize-css';
+import { createNewQuestion } from '../../actions/admin';
 
 export default function QuestionPage() {
   const [name, setName] = React.useState('');
   const [duration, setDuration] = React.useState('');
   const [points, setPoints] = React.useState(0);
-  const [questionType, setType] = React.useState('1');
+  const [questionType, setType] = React.useState('single choice');
   const [videoLink, setVideo] = React.useState('');
   const [correctAnswer, setCorrect] = React.useState('');
   const [answer1, setAnswer1] = React.useState('');
   const [answer2, setAnswer2] = React.useState('');
   const [answer3, setAnswer3] = React.useState('');
   const [answer4, setAnswer4] = React.useState('');
-
-  // 得到数据后是不是可以按照hayden的格式造出reqdata然后调put/admin/quiz/{quizid}
-  function Payload() {
-    console.log(name, duration, points, questionType,
-      videoLink, correctAnswer, answer1, answer2,
-      answer3, answer4);
-  }
+  M.AutoInit();
+  const handleSubmit = (event) => {
+    const questionAnswers = [];
+    questionAnswers.push(answer1, answer2, answer3, answer4);
+    const questionInfo = {
+      name,
+      duration,
+      points,
+      questionType,
+      videoLink,
+      correctAnswer,
+      answers: questionAnswers,
+    };
+    // console.log(`path:${window.location.pathname.split('/')[2]}`);
+    const CurrentGameId = window.location.pathname.split('/')[2];
+    console.log(questionInfo);
+    createNewQuestion(CurrentGameId, questionInfo);
+    event.preventDefault();
+  };
 
   const pagePrior = (
     <>
@@ -29,8 +43,8 @@ export default function QuestionPage() {
           }}
         >
           <option value="" disabled selected>Choose your question type</option>
-          <option value="1">single choice</option>
-          <option value="2">multiple choice</option>
+          <option value="single choice">single choice</option>
+          <option value="multiple choice">multiple choice</option>
         </select>
       </div>
       <div className="input-field col s6">
@@ -69,7 +83,7 @@ export default function QuestionPage() {
       <div className="input-field col s6">
         Video Link
         <input
-          id="points"
+          id="videoLink"
           type="text"
           className="validate"
           onChange={(e) => {
@@ -77,18 +91,6 @@ export default function QuestionPage() {
           }}
         />
       </div>
-      {/* 这个有要上传文件吗 */}
-      <form action="#">
-        <div className="file-field input-field">
-          <div className="btn">
-            <span>File</span>
-            <input type="file" />
-          </div>
-          <div className="file-path-wrapper">
-            <input className="file-path validate" type="text" />
-          </div>
-        </div>
-      </form>
       <div className="input-field col s6">
         Answer 1
         <i className="material-icons prefix">mode_edit</i>
@@ -136,7 +138,7 @@ export default function QuestionPage() {
     </>
   );
   // 多选那里还是有点问题
-  if (questionType === '1') {
+  if (questionType === 'single choice') {
     return (
       <div className="form">
         {pagePrior}
@@ -148,13 +150,13 @@ export default function QuestionPage() {
             }}
           >
             <option value="" disabled selected>Choose the right answer</option>
-            <option value="ans_1">Answer 1</option>
-            <option value="ans_2">Answer 2</option>
-            <option value="ans_3">Answer 3</option>
-            <option value="ans_4">Answer 4</option>
+            <option value="answer1">Answer 1</option>
+            <option value="answer2">Answer 2</option>
+            <option value="answer3">Answer 3</option>
+            <option value="answer4">Answer 4</option>
           </select>
         </div>
-        <input type="submit" value="Submit" className="btn waves-effect waves-light" onClick={Payload} />
+        <input type="submit" value="Submit" className="btn waves-effect waves-light" onClick={handleSubmit} />
       </div>
     );
   }
@@ -162,22 +164,22 @@ export default function QuestionPage() {
   return (
     <div className="form">
       {pagePrior}
-      <div className="input-field col s12">
+      <div className="input-field col s12 " style={{ display: 'block' }}>
         <select
           multiple
-          style={{ display: 'block' }}
+          // style={{ display: 'block' }}
           onChange={(e) => {
             setCorrect(e.target.value);
           }}
         >
           <option value="" disabled selected>Choose your right answers</option>
-          <option value="ans_1">Answer 1</option>
-          <option value="ans_2">Answer 2</option>
-          <option value="ans_3">Answer 3</option>
-          <option value="ans_4">Answer 4</option>
+          <option value="answer1">Answer 1</option>
+          <option value="answer2">Answer 2</option>
+          <option value="answer3">Answer 3</option>
+          <option value="answer4">Answer 4</option>
         </select>
       </div>
-      <input type="submit" value="Submit" className="btn waves-effect waves-light" onClick={Payload} />
+      <input type="submit" value="Submit" className="btn waves-effect waves-light" onClick={handleSubmit} />
     </div>
   );
 }

@@ -7,7 +7,6 @@ const Delete = (props) => {
   const [ID, setID] = useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('try to submit');
     await props.DeleteGame({ ID });
   };
   const handleChange = (e) => {

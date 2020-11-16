@@ -12,6 +12,14 @@ export const customStyles = {
   },
 };
 
+export const pageConfig = {
+  content: {
+    display: 'flex',
+    alignContent: 'center',
+    justifyItems: 'center',
+  },
+};
+
 export const config = {
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',

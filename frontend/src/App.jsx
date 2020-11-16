@@ -27,9 +27,8 @@ function App() {
         <Route exact path="/dashboard"><Dashboard /></Route>
         <Route exact path="/edit/:id" component={EditGame} />
         <Route exact path="/edit/:qid/:qid" component={QuestionPage} />
-        <Route exact path="/game/427398257/" />
-        <Route exact path="/game/862040729/" />
-
+        <Route exact path="/game/:gid/:sid"><div>This is your game!</div></Route>
+        <Route exact path="/result/:sid"><div>This is your result!</div></Route>
       </Switch>
     </Router>
   );

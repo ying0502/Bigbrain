@@ -14,7 +14,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       this.props.quizzes && this.props.quizzes.length > 0 ? this.props.quizzes.map((item) => (
-        <div key={item.id} style={{ margin: 'auto' }}>
+        <div key={item.id}>
           {' '}
           <GameItem item={item} />
         </div>

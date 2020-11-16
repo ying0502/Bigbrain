@@ -188,6 +188,23 @@ function createNewQuestion(quizId, updatedQuestion) {
   });
 }
 
+// get session results
+function GetSessionResult(sessionId) {
+  fetch(`${targetUrl}admin/session/${sessionId}/results`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  }).then((result) => result.json())
+    .then((result) => {
+      console.log(result);
+    }).catch((err) => {
+      console.log(err);
+      M.toast({ html: 'Fetch fail', classes: 'rounded' });
+    });
+}
+
 export {
   createGame,
   getQuiz,
@@ -196,4 +213,5 @@ export {
   StartNewSession,
   endSession,
   createNewQuestion,
+  GetSessionResult,
 };

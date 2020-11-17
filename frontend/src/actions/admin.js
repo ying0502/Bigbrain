@@ -200,10 +200,27 @@ function GetSessionResult(sessionId) {
     .then((result) => {
       console.log(result);
     }).catch((err) => {
-      console.log(err);
+      console.log(`err:${err}`);
       M.toast({ html: 'Fetch fail', classes: 'rounded' });
     });
 }
+
+// player join
+const PlayerJoin = ({ sessionId, name }) => {
+  fetch(`${targetUrl}play/join/${sessionId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+      'Access-Control-Allow-Origin': '*',
+    },
+    body: JSON.stringify({ name }),
+  }).then((result) => {
+    console.log(result);
+  }).catch((err) => {
+    console.log(`err:${err}`);
+    M.toast({ html: 'Fetch fail', classes: 'rounded' });
+  });
+};
 
 export {
   createGame,
@@ -214,4 +231,5 @@ export {
   endSession,
   createNewQuestion,
   GetSessionResult,
+  PlayerJoin,
 };

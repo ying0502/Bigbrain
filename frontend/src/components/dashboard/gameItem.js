@@ -5,7 +5,7 @@ import M from 'materialize-css';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import timeTransform, { customStyles, targetUrl } from '../../utils/utils';
-import { getEachQuiz, StartNewSession } from '../../actions/admin';
+import { StartNewSession } from '../../actions/admin';
 
 class GameItem extends React.Component {
   constructor(props) {
@@ -101,7 +101,7 @@ class GameItem extends React.Component {
                 </div>
               </Modal>
               <Link to={`/edit/${this.props.item.id}/`} className="avatar">
-                <button className="btn" type="button" onClick={getEachQuiz(this.props.item.id)}>edit</button>
+                <button className="btn" type="button">edit</button>
               </Link>
               <span className="right">
                 {timeTransform(this.props.item.createdAt)}

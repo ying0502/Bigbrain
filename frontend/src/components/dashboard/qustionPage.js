@@ -137,7 +137,6 @@ export default function QuestionPage() {
       </div>
     </>
   );
-  // 多选那里还是有点问题
   if (questionType === 'single choice') {
     return (
       <div className="form">
@@ -146,6 +145,7 @@ export default function QuestionPage() {
           <select
             style={{ display: 'block' }}
             onChange={(e) => {
+              console.log(e.target.value);
               setCorrect(e.target.value);
             }}
           >
@@ -169,7 +169,14 @@ export default function QuestionPage() {
           multiple
           // style={{ display: 'block' }}
           onChange={(e) => {
-            setCorrect(e.target.value);
+            const { options } = e.target;
+            const value = [];
+            for (let i = 0, l = options.length; i < l; i + 1) {
+              if (options[i].selected) {
+                value.push(options[i].value);
+              }
+            }
+            setCorrect(value);
           }}
         >
           <option value="" disabled selected>Choose your right answers</option>

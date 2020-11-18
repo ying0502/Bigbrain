@@ -14,9 +14,6 @@ class GameItem extends React.Component {
       a: '',
       modalIsOpen: false,
     };
-    this.EndSession = this.EndSession.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
   }
 
   openModal = () => {

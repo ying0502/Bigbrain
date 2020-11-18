@@ -28,6 +28,7 @@ class EditGame extends React.Component {
     event.preventDefault();
     console.log(`newName: ${this.state.newName}`);
     console.log(`newThumbnail: ${this.state.newThumbNail}`);
+    // const payLoad = {"name": this.state.newName, "thumbnail": this.state.newThumbNail}
   }
 
   handleNameChange = (e) => {

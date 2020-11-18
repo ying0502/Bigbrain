@@ -1,6 +1,6 @@
 import React from 'react';
 import M from 'materialize-css';
-import { createNewQuestion } from '../../actions/admin';
+// import { createNewQuestion } from '../../actions/admin';
 
 export default function QuestionPage() {
   const [name, setName] = React.useState('');
@@ -14,7 +14,7 @@ export default function QuestionPage() {
   const [answer3, setAnswer3] = React.useState('');
   const [answer4, setAnswer4] = React.useState('');
   M.AutoInit();
-  const handleSubmit = (event) => {
+  const handleSave = (event) => {
     const questionAnswers = [];
     questionAnswers.push(answer1, answer2, answer3, answer4);
     const questionInfo = {
@@ -28,8 +28,9 @@ export default function QuestionPage() {
     };
     // console.log(`path:${window.location.pathname.split('/')[2]}`);
     const CurrentGameId = window.location.pathname.split('/')[2];
-    console.log(questionInfo);
-    createNewQuestion(CurrentGameId, questionInfo);
+    const CurrentQuestionId = window.location.pathname.split('/')[3];
+    console.log(CurrentGameId, CurrentQuestionId, questionInfo);
+    // localStorage.setItem(`${CurrentGameId}_${CurrentQuestionId}_Info`, questionInfo);
     event.preventDefault();
   };
 
@@ -171,7 +172,7 @@ export default function QuestionPage() {
           onChange={(e) => {
             const { options } = e.target;
             const value = [];
-            for (let i = 0, l = options.length; i < l; i + 1) {
+            for (let i = 0, l = options.length; i < l; i += 1) {
               if (options[i].selected) {
                 value.push(options[i].value);
               }
@@ -186,7 +187,7 @@ export default function QuestionPage() {
           <option value="answer4">Answer 4</option>
         </select>
       </div>
-      <input type="submit" value="Submit" className="btn waves-effect waves-light" onClick={handleSubmit} />
+      <input type="submit" value="Save" className="btn waves-effect waves-light" onClick={handleSave} />
     </div>
   );
 }

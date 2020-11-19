@@ -10,6 +10,7 @@ import {
   GET_QUIZ,
   DELETE_GAME,
   GET_EACH_QUIZ,
+  GET_PLAYER_ID,
 } from './actionTypes';
 import { targetUrl, Config } from '../utils/utils';
 
@@ -207,7 +208,7 @@ function GetSessionResult(sessionId) {
 }
 
 // player join
-const PlayerJoin = ({ sessionId, name }) => {
+const PlayerJoin = (sessionId, name) => (dispatch) => {
   fetch(`${targetUrl}play/join/${sessionId}`, {
     method: 'POST',
     headers: {
@@ -217,10 +218,29 @@ const PlayerJoin = ({ sessionId, name }) => {
     body: JSON.stringify({ name }),
   }).then((result) => {
     console.log(result);
-  }).catch((err) => {
-    console.log(`err:${err}`);
-    M.toast({ html: 'Fetch fail', classes: 'rounded' });
-  });
+    if (result.status === 200) {
+      M.toast({
+        html: 'Join session Success',
+        classes: 'rounded',
+      });
+      return result.json();
+    }
+    M.toast({
+      html: 'Join session fail',
+      classes: 'rounded',
+    });
+    return 0;
+  }).then((r) => {
+    console.log(r);
+    dispatch({
+      type: GET_PLAYER_ID,
+      payload: r,
+    });
+  })
+    .catch((err) => {
+      console.log(`err:${err}`);
+      M.toast({ html: 'Fetch fail', classes: 'rounded' });
+    });
 };
 
 export {

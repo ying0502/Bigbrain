@@ -13,6 +13,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import Narvbar from './components/homePage/narvbar';
 import HomePage from './components/homePage/homePage';
 import EditGame from './components/dashboard/editGame';
+import SessionPage from './components/Player/SessionPage';
 
 // import { LogoutButton } from './Logout_button';
 /* eslint-disable react/destructuring-assignment */
@@ -26,8 +27,8 @@ function App() {
         <Route exact path="/register"><SignupForm /></Route>
         <Route exact path="/dashboard"><Dashboard /></Route>
         <Route exact path="/edit/:id" component={EditGame} />
-        <Route exact path="/edit/:qid/:qid" component={QuestionPage} />
-        <Route exact path="/game/:gid/:sid"><div>This is your game!</div></Route>
+        <Route exact path="/edit/:gid/:qid" component={QuestionPage} />
+        <Route exact path="/game/:gid/:sid"><SessionPage /></Route>
         <Route exact path="/result/:sid"><div>This is your result!</div></Route>
       </Switch>
     </Router>

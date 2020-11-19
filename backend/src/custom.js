@@ -13,9 +13,13 @@ export const quizQuestionPublicReturn = question => {
  the correct answers (minimum 1).
 */
 export const quizQuestionGetCorrectAnswers = question => {
-  return [
-    123,
-  ]; // For a single answer
+  const correctAns = question.correctAnswer.split(',');
+  const idList = [];
+  for (let i = 0; i < correctAns.length; i++) {
+    const id = correctAns[i][-1];
+    idList.push(id);
+  }
+  return idList; // For a single answer
 };
 
 /*
@@ -24,9 +28,10 @@ export const quizQuestionGetCorrectAnswers = question => {
 */
 export const quizQuestionGetAnswers = question => {
   return [
-    123,
-    456,
-    678,
+    '1',
+    '2',
+    '3',
+    '4',
   ]; // For a single answer
 };
 
@@ -35,5 +40,5 @@ export const quizQuestionGetAnswers = question => {
  of the question once it starts. (Seconds)
 */
 export const quizQuestionGetDuration = question => {
-  return 10;
+  return question.duration;
 };

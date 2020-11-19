@@ -158,27 +158,28 @@ function endSession(quizId) {
   });
 }
 
-// create new question
-function createNewQuestion(quizId, updatedQuestion) {
+// Update information of fame
+function UpdateGame(quizId, payload) {
+  console.log(payload);
   fetch(`${targetUrl}admin/quiz/${quizId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
-    body: JSON.stringify({
-      questions: [updatedQuestion],
-    }),
+    body: JSON.stringify(
+      payload,
+    ),
   }).then((result) => {
     console.log(result);
     if (result.status === 200) {
       M.toast({
-        html: 'Create question Success',
+        html: 'Update game Success',
         classes: 'rounded',
       });
     } else {
       M.toast({
-        html: 'Create question fail',
+        html: 'Update game fail',
         classes: 'rounded',
       });
     }
@@ -229,7 +230,7 @@ export {
   getEachQuiz,
   StartNewSession,
   endSession,
-  createNewQuestion,
+  UpdateGame,
   GetSessionResult,
   PlayerJoin,
 };

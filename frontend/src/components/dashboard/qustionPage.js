@@ -3,34 +3,36 @@ import M from 'materialize-css';
 // import { createNewQuestion } from '../../actions/admin';
 
 export default function QuestionPage() {
-  const [name, setName] = React.useState('');
-  const [duration, setDuration] = React.useState('');
-  const [points, setPoints] = React.useState(0);
-  const [questionType, setType] = React.useState('single choice');
-  const [videoLink, setVideo] = React.useState('');
-  const [correctAnswer, setCorrect] = React.useState('');
-  const [answer1, setAnswer1] = React.useState('');
-  const [answer2, setAnswer2] = React.useState('');
-  const [answer3, setAnswer3] = React.useState('');
-  const [answer4, setAnswer4] = React.useState('');
+  const CurrentGameId = window.location.pathname.split('/')[2];
+  const CurrentQuestionId = window.location.pathname.split('/')[3];
+  const [name, setName] = React.useState(localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_name`));
+  const [duration, setDuration] = React.useState(localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_duration`));
+  const [points, setPoints] = React.useState(localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_points`));
+  const [questionType, setType] = React.useState(localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_questionType`));
+  const [videoLink, setVideo] = React.useState(localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_videoLink`));
+  const [correctAnswer, setCorrect] = React.useState(localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_correctAnswer`));
+  const [answer1, setAnswer1] = React.useState(localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_Answer1`));
+  const [answer2, setAnswer2] = React.useState(localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_Answer2`));
+  const [answer3, setAnswer3] = React.useState(localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_Answer3`));
+  const [answer4, setAnswer4] = React.useState(localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_Answer4`));
+
   M.AutoInit();
+
   const handleSave = (event) => {
-    const questionAnswers = [];
-    questionAnswers.push(answer1, answer2, answer3, answer4);
-    const questionInfo = {
-      name,
-      duration,
-      points,
-      questionType,
-      videoLink,
-      correctAnswer,
-      answers: questionAnswers,
-    };
-    // console.log(`path:${window.location.pathname.split('/')[2]}`);
-    const CurrentGameId = window.location.pathname.split('/')[2];
-    const CurrentQuestionId = window.location.pathname.split('/')[3];
-    console.log(CurrentGameId, CurrentQuestionId, questionInfo);
-    // localStorage.setItem(`${CurrentGameId}_${CurrentQuestionId}_Info`, questionInfo);
+    localStorage.setItem(`${CurrentGameId}_${CurrentQuestionId}_Info_name`, name);
+    localStorage.setItem(`${CurrentGameId}_${CurrentQuestionId}_Info_duration`, duration);
+    localStorage.setItem(`${CurrentGameId}_${CurrentQuestionId}_Info_points`, points);
+    localStorage.setItem(`${CurrentGameId}_${CurrentQuestionId}_Info_questionType`, questionType);
+    localStorage.setItem(`${CurrentGameId}_${CurrentQuestionId}_Info_videoLink`, videoLink);
+    localStorage.setItem(`${CurrentGameId}_${CurrentQuestionId}_Info_correctAnswer`, correctAnswer);
+    localStorage.setItem(`${CurrentGameId}_${CurrentQuestionId}_Info_Answer1`, answer1);
+    localStorage.setItem(`${CurrentGameId}_${CurrentQuestionId}_Info_Answer2`, answer2);
+    localStorage.setItem(`${CurrentGameId}_${CurrentQuestionId}_Info_Answer3`, answer3);
+    localStorage.setItem(`${CurrentGameId}_${CurrentQuestionId}_Info_Answer4`, answer4);
+    M.toast({
+      html: 'Save Update Success',
+      classes: 'rounded',
+    });
     event.preventDefault();
   };
 
@@ -43,7 +45,7 @@ export default function QuestionPage() {
             setType(e.target.value);
           }}
         >
-          <option value="" disabled selected>Choose your question type</option>
+          <option value="" disabled selected>{localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_questionType`)}</option>
           <option value="single choice">single choice</option>
           <option value="multiple choice">multiple choice</option>
         </select>
@@ -57,6 +59,7 @@ export default function QuestionPage() {
           onChange={(e) => {
             setName(e.target.value);
           }}
+          placeholder={localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_name`)}
         />
       </div>
       <div className="input-field col s6">
@@ -68,6 +71,7 @@ export default function QuestionPage() {
           onChange={(e) => {
             setDuration(e.target.value);
           }}
+          placeholder={localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_duration`)}
         />
       </div>
       <div className="input-field col s6">
@@ -79,6 +83,7 @@ export default function QuestionPage() {
           onChange={(e) => {
             setPoints(e.target.value);
           }}
+          placeholder={localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_points`)}
         />
       </div>
       <div className="input-field col s6">
@@ -90,6 +95,7 @@ export default function QuestionPage() {
           onChange={(e) => {
             setVideo(e.target.value);
           }}
+          placeholder={localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_videoLink`)}
         />
       </div>
       <div className="input-field col s6">
@@ -101,6 +107,7 @@ export default function QuestionPage() {
           onChange={(e) => {
             setAnswer1(e.target.value);
           }}
+          placeholder={localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_Answer1`)}
         />
       </div>
       <div className="input-field col s6">
@@ -112,6 +119,7 @@ export default function QuestionPage() {
           onChange={(e) => {
             setAnswer2(e.target.value);
           }}
+          placeholder={localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_Answer2`)}
         />
       </div>
       <div className="input-field col s6">
@@ -123,6 +131,7 @@ export default function QuestionPage() {
           onChange={(e) => {
             setAnswer3(e.target.value);
           }}
+          placeholder={localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_Answer3`)}
         />
       </div>
       <div className="input-field col s6">
@@ -134,11 +143,12 @@ export default function QuestionPage() {
           onChange={(e) => {
             setAnswer4(e.target.value);
           }}
+          placeholder={localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_Answer4`)}
         />
       </div>
     </>
   );
-  if (questionType === 'single choice') {
+  if (questionType === 'single choice' || questionType === null) {
     return (
       <div className="form">
         {pagePrior}
@@ -150,14 +160,14 @@ export default function QuestionPage() {
               setCorrect(e.target.value);
             }}
           >
-            <option value="" disabled selected>Choose the right answer</option>
+            <option value="" disabled selected>{localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_correctAnswer`)}</option>
             <option value="answer1">Answer 1</option>
             <option value="answer2">Answer 2</option>
             <option value="answer3">Answer 3</option>
             <option value="answer4">Answer 4</option>
           </select>
         </div>
-        <input type="submit" value="Submit" className="btn waves-effect waves-light" onClick={handleSubmit} />
+        <input type="submit" value="Save" className="btn waves-effect waves-light" onClick={handleSave} />
       </div>
     );
   }
@@ -180,7 +190,7 @@ export default function QuestionPage() {
             setCorrect(value);
           }}
         >
-          <option value="" disabled selected>Choose your right answers</option>
+          <option value="" disabled selected>{localStorage.getItem(`${CurrentGameId}_${CurrentQuestionId}_Info_correctAnswer`)}</option>
           <option value="answer1">Answer 1</option>
           <option value="answer2">Answer 2</option>
           <option value="answer3">Answer 3</option>

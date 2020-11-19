@@ -9,16 +9,20 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.props.getQuiz();
     // console.log(this.props.quizzes.length);
+    this.props.quizzes.map((item) => {
+      localStorage.setItem(`game_${item.id}_name`, `${item.name}`);
+      localStorage.setItem(`game_${item.id}_thumbnail`, `${item.thumbnail}`);
+      return 0;
+    });
   }
 
   render() {
     return (
-      this.props.quizzes && this.props.quizzes.length > 0 ? this.props.quizzes.map((item) => (
-        <div key={item.id}>
-          {' '}
-          <GameItem item={item} />
-        </div>
-      )) : <div>no quiz now</div>
+      <div>
+        {this.props.quizzes && this.props.quizzes.length > 0 ? this.props.quizzes.map((item) => (
+          <GameItem item={item} key={item.id} />
+        )) : <div>no quiz now</div>}
+      </div>
     );
   }
 }

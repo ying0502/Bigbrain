@@ -77,8 +77,8 @@ describe('Test the root path', () => {
   });
 
   /***************************************************************
-                       Auth Tests
-  ***************************************************************/
+   Auth Tests
+   ***************************************************************/
 
   test('Registration of initial user', async () => {
     const body = await postTry('/admin/auth/register', 200, {
@@ -130,8 +130,8 @@ describe('Test the root path', () => {
   });
 
   /***************************************************************
-                       Quiz Tests
-  ***************************************************************/
+   Quiz Tests
+   ***************************************************************/
   test('Initially there are no quizzes', async () => {
     const body = await getTry('/admin/quiz', 200, {}, await validToken());
     expect(body.quizzes).toHaveLength(0);
@@ -215,8 +215,8 @@ describe('Test the root path', () => {
   });
 
   /***************************************************************
-                       Admin Running a Session
-  ***************************************************************/
+   Admin Running a Session
+   ***************************************************************/
 
   test('Can\'t start a session with invalid token', async () => {
     const body = await postTry('/admin/quiz/123/start', 403, {});
@@ -274,16 +274,16 @@ describe('Test the root path', () => {
   });
 
   /***************************************************************
-                       Try Playing
-  ***************************************************************/
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+   Try Playing
+   ***************************************************************/
+  <<<<<<< HEAD
+  <<<<<<< HEAD
+    =======
 });
 =======
 >>>>>>> a4a7d6893e40b5560abf25e768b958ed3a1bfe98
 
-  test('Test player can\'t join without a name', async () => {
+test('Test player can\'t join without a name', async () => {
     const sessionId = await singleSessionId();
     await postTry(`/play/join/${sessionId}`, 400, {});
   });

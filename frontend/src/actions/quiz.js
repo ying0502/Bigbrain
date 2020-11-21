@@ -41,25 +41,7 @@ export const UpdateGame = (quizId, payload) => (dispatch) => {
   });
 };
 
-// DeleteGame
-// export const AdvanceGame = async (
-//   ID,
-// ) => {
-//   try {
-//     console.log(Config, ID);
-//     await axios.post(`${targetUrl}admin/quiz/${ID}/advance`, Config);
-//     M.toast({
-//       html: 'Advance success',
-//       classes: 'rounded',
-//     });
-//   } catch (err) {
-//     M.toast({
-//       html: err.response.data.error,
-//       classes: 'rounded',
-//     });
-//   }
-// };
-
+// AdvanceGame
 export const AdvanceGame = (quizId) => {
   fetch(`${targetUrl}admin/quiz/${quizId}/advance`, {
     method: 'POST',

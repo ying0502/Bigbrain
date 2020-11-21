@@ -47,6 +47,7 @@ export default function QuestionPage() {
         Question Information Update
       </h2>
       <div className="input-field col s12">
+        Question Type
         <select
           style={{ display: 'block' }}
           onChange={(e) => {
@@ -59,7 +60,7 @@ export default function QuestionPage() {
         </select>
       </div>
       <div className="input-field col s6">
-        Question
+        Question Name
         <input
           id="question"
           type="text"
@@ -161,6 +162,7 @@ export default function QuestionPage() {
       <div className="form">
         {pagePrior}
         <div className="input-field col s12">
+          Correct Answer
           <select
             style={{ display: 'block' }}
             onChange={(e) => {
@@ -174,7 +176,7 @@ export default function QuestionPage() {
             <option value="answer4">Answer 4</option>
           </select>
         </div>
-        <input type="submit" value="Save" className="btn waves-effect waves-light" onClick={(event) => handleSave(event)} />
+        <button type="submit" className="btn waves-effect waves-light" onClick={(event) => handleSave(event)}>Save</button>
       </div>
     );
   }
@@ -183,6 +185,7 @@ export default function QuestionPage() {
     <div className="form">
       {pagePrior}
       <div className="input-field col s12 " style={{ display: 'block' }}>
+        Correct Answer
         <select
           multiple
           // style={{ display: 'block' }}
@@ -204,9 +207,7 @@ export default function QuestionPage() {
           <option value="answer4">Answer 4</option>
         </select>
       </div>
-
-      <input type="submit" value="Save" className="btn waves-effect waves-light" onClick={(event) => handleSave(event)} />
-
+      <button type="submit" className="btn waves-effect waves-light" onClick={(event) => handleSave(event)}>Save</button>
     </div>
   );
 }

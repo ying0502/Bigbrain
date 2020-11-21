@@ -95,7 +95,6 @@ class GameItem extends React.Component {
               <p>
                 Total time to complete:
                 {!this.state.time ? 0 : this.state.time}
-                s
               </p>
               {/* eslint-disable-next-line react/jsx-no-target-blank */}
               <a href={`game/${this.props.item.id}/${this.props.item.active}`} target="_blank">{this.props.item.active == null ? null : 'Go to Play the game!'}</a>

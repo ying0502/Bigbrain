@@ -1,15 +1,22 @@
 import {
   QUIZ_NUMBER,
+  ADVANCE,
 } from '../actions/actionTypes';
 
 export default function (state = {}, action) {
-  const { type, number } = action;
+  const { type, number, payload } = action;
   switch (type) {
     case QUIZ_NUMBER:
-      console.log('questions amount', number);
       return {
         ...state,
         number,
+      };
+
+    case ADVANCE:
+      console.log(payload);
+      return {
+        ...state,
+        payload,
       };
 
     default:

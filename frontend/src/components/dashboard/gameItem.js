@@ -99,7 +99,7 @@ class GameItem extends React.Component {
               </p>
               {/* eslint-disable-next-line react/jsx-no-target-blank */}
               <a href={`game/${this.props.item.id}/${this.props.item.active}`} target="_blank">{this.props.item.active == null ? null : 'Go to Play the game!'}</a>
-              <div>{this.props.item.active == null ? '' : <button className="btn" onClick={() => AdvanceGame(this.props.item.active)} style={{ backgroundColor: 'purple' }} type="button">advance</button>}</div>
+              <div>{this.props.item.active == null ? '' : <button className="btn" onClick={() => AdvanceGame(this.props.item.id)} style={{ backgroundColor: 'purple' }} type="button">advance</button>}</div>
             </div>
             <div className="card-action">
               <button

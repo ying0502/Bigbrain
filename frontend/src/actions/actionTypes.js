@@ -20,3 +20,5 @@ export const GET_PLAYER_ID = 'GET_PLAYER_ID';
 export const UPDATE_GAME = 'UPDATE_GAME';
 
 export const QUIZ_NUMBER = 'QUIZ_NUMBER';
+
+export const ADVANCE = 'ADVANCE';

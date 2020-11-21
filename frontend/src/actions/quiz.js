@@ -1,9 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 import M from 'materialize-css';
+import axios from 'axios';
 import {
   QUIZ_NUMBER,
 } from './actionTypes';
-import { targetUrl } from '../utils/utils';
+import { targetUrl, Config, config } from '../utils/utils';
 
 // Update information of fame
 export const UpdateGame = (quizId, payload) => (dispatch) => {
@@ -38,4 +39,24 @@ export const UpdateGame = (quizId, payload) => (dispatch) => {
     console.log(err);
     M.toast({ html: 'Fetch fail', classes: 'rounded' });
   });
+};
+
+// DeleteGame
+export const AdvanceGame = async (
+  ID,
+) => {
+  try {
+    console.log(Config, ID);
+    await axios.post(`${targetUrl}admin/quiz/${Number(ID)}/advance`, config);
+
+    M.toast({
+      html: 'Advance success',
+      classes: 'rounded',
+    });
+  } catch (err) {
+    M.toast({
+      html: err.response.data.error,
+      classes: 'rounded',
+    });
+  }
 };

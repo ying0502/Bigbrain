@@ -64,7 +64,7 @@ class GameItem extends React.Component {
             <span className="card-image" />
             <div className="card-content">
               <span className="card-title">{this.props.item.name}</span>
-              <img src={this.props.item.thumbnail} alt="game_thumbnail" className="thumbnail" />
+              <img src={this.props.item.thumbnail} id={`thumb_${this.props.item.name}`} alt="game_thumbnail" className="thumbnail" />
               <p>
                 Question Number: 0
                 {a}

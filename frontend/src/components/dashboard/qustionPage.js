@@ -38,6 +38,9 @@ export default function QuestionPage() {
 
   const pagePrior = (
     <>
+      <h2>
+        Question Information Update
+      </h2>
       <div className="input-field col s12">
         <select
           style={{ display: 'block' }}

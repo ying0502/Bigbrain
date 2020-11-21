@@ -26,6 +26,7 @@ const SessionPage = (props) => {
       // eslint-disable-next-line react/prop-types
       console.log(props.playerId);
     }
+    setIsOpen(false);
     e.preventDefault();
   };
   return (

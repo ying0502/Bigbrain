@@ -8,7 +8,7 @@ import M from 'materialize-css';
 // import axios from 'axios';
 
 const QuestionItem = (props) => {
-  const [countDown, setCountDown] = useState(props.data.duration || 0);
+  const [countDown, setCountDown] = useState(props.data.duration);
   const [showAnsw, setShowAnsw] = useState(false);
 
   useEffect(() => {
@@ -31,11 +31,15 @@ const QuestionItem = (props) => {
       if (props.stage) {
         props.newQues();
       }
-    }, 5000);
+    }, 1000);
     return () => {
       clearInterval(id);
     };
-  }, [props.data]);
+  }, [props.data.name]);
+
+  useEffect(() => {
+    setCountDown(props.data.duration);
+  }, [props.data.name]);
 
   const returnMult = () => (
     <form>
@@ -84,7 +88,8 @@ const QuestionItem = (props) => {
       <h3>{props.data.name}</h3>
 
       {props.data.questionType === 'multiple choice' ? returnMult() : returnSigl()}
-
+      1213333
+      { props.stage}
       {showAnsw
         ? (
           <div>

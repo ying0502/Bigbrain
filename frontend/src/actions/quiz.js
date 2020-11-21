@@ -42,12 +42,7 @@ export const UpdateGame = (quizId, payload) => (dispatch) => {
   });
 };
 
-<<<<<<< HEAD
-// AdvanceGame
-export const AdvanceGame = (quizId) => {
-=======
 export const AdvanceGame = (quizId) => (dispatch) => {
->>>>>>> 8c3da101dfb98de614a09f68fa3efe0231c21aeb
   fetch(`${targetUrl}admin/quiz/${quizId}/advance`, {
     method: 'POST',
     headers: {

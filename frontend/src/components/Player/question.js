@@ -42,22 +42,30 @@ const QuestionItem = (props) => {
   }, [props.data.name]);
 
   const returnMult = () => (
-    <form>
+    <form action="#">
       <p>
-        <input type="checkbox" checked="checked" />
-        <label htmlFor="test1">{props.data.answers1}</label>
+        <label htmlFor="test1">
+          <input type="checkbox" id="test1" style={{ opacity: '1' }} className="filled-in" />
+          <span>{props.data.answers1}</span>
+        </label>
       </p>
       <p>
-        <input type="checkbox" id="test2" />
-        <label htmlFor="test2">{props.data.answers2}</label>
+        <label htmlFor="test2">
+          <input type="checkbox" id="test2" style={{ opacity: '1' }} className="filled-in" />
+          <span>{props.data.answers2}</span>
+        </label>
       </p>
       <p>
-        <input type="checkbox" id="test3" />
-        <label htmlFor="test3">{props.data.answers3}</label>
+        <label htmlFor="test3">
+          <input type="checkbox" id="test3" style={{ opacity: '1' }} className="filled-in" />
+          <span>{props.data.answers3}</span>
+        </label>
       </p>
       <p>
-        <input type="checkbox" id="test4" />
-        <label htmlFor="test4">{props.data.answers4}</label>
+        <label htmlFor="test4">
+          <input type="checkbox" id="test4" style={{ opacity: '1' }} className="filled-in" />
+          <span>{props.data.answers4}</span>
+        </label>
       </p>
     </form>
   );
@@ -65,20 +73,28 @@ const QuestionItem = (props) => {
   const returnSigl = () => (
     <form>
       <p>
-        <input type="radio" id="test1" />
-        <label htmlFor="test1">{props.data.answers1}</label>
+        <label htmlFor="test1">
+          <input type="radio" name="group1" id="test1" style={{ opacity: '1' }} />
+          <span>{props.data.answers1}</span>
+        </label>
       </p>
       <p>
-        <input type="radio" id="test2" />
-        <label htmlFor="test2">{props.data.answers2}</label>
+        <label htmlFor="test2">
+          <input type="radio" name="group1" id="test2" style={{ opacity: '1' }} />
+          <span>{props.data.answers2}</span>
+        </label>
       </p>
       <p>
-        <input type="radio" id="test3" />
-        <label htmlFor="test3">{props.data.answers3}</label>
+        <label htmlFor="test3">
+          <input type="radio" name="group1" id="test3" style={{ opacity: '1' }} />
+          <span>{props.data.answers3}</span>
+        </label>
       </p>
       <p>
-        <input type="radio" id="test4" />
-        <label htmlFor="test4">{props.data.answers4}</label>
+        <label htmlFor="test4">
+          <input type="radio" name="group1" id="test4" style={{ opacity: '1' }} />
+          <span>{props.data.answers4}</span>
+        </label>
       </p>
     </form>
   );

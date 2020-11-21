@@ -101,39 +101,39 @@ class EditGame extends React.Component {
   renderNoQuestions() {
     // console.log(this.state.questions);
     return (
-      <div className="pageConfig">
-        <div>
-          <h2>Game Edit</h2>
-          New Name:
-          <input style={{ width: '350px' }} value={this.state.newName} onChange={this.handleNameChange} placeholder="Change the name of current quiz" id="New_name_1" type="text" className="validate" />
-          <form>
-            <div className="file-field input-field">
-              <div>
-                <span className="btn">Update the thumbnail</span>
-                <input type="file" multiple onChange={this.handleThumbnailChange} />
+      <div className="pageConfig question">
+        <div className="row">
+          <h2>Game Edit<span className="tips"><i>remember: add your questions first then update the thumbnail</i></span></h2>
+          <form className="col l6">
+            <div className="">{'You don\'t have question now, add your first question'}</div>
+            {this.state.questions.map((item, index) => (
+              <div className="input-field">
+                {/* 显示上次的信息 question */}
+                <span className="question">Question {index + 1}</span>
+                <button type="button" className="btn" onClick={this.handleAdd} style={{ marginRight: '10px', backgroundColor: '#e53935' }}>add</button>
+                <button type="button" className="btn" onClick={() => this.handleDelete(index)} style={{ marginRight: '10px', backgroundColor: '#01579b' }}>delete</button>
+                <Link to={`/edit/${this.props.match.params.id}/${index + 1}`} className="avatar">
+                  <button type="button" className="btn">edit</button>
+                </Link>
               </div>
+            ))}
+            <button type="button" className="btn" onClick={this.submit} style={{ marginRight: '10px' }}>save yout question before edit</button>
+          </form>
+
+          <form className="col l6">
+            <div>
+              New Name:
+              <input value={this.state.newName} onChange={this.handleNameChange} placeholder="Change the name of current quiz if you wanna to " id="New_name_2" type="text" />
+            </div>
+            <div className="file-field input-field">
+              Update the thumbnail：
+              <input type="file" multiple onChange={this.handleThumbnailChange} />
               <div className="file-path-wrapper">
-                <input style={{ width: '350px' }} value={this.state.newThumbNail} id="thumbnailUpdate1" placeholder="only *.jpg and *.png will be accepted" />
+                <input id="thumbnailUpdate2" value={this.state.newThumbNail} type="text" placeholder="only *.jpg and *.png will be accepted" />
               </div>
             </div>
           </form>
-          <div>You have no questions right now, you can add or delete questions</div>
-          <div className="row">
-            {this.state.questions.map((item, index) => (
-              <div className="row">
-                <div className="input-field col s12">
-                  {/* 显示上次的信息 question */}
-                  <span>Question ${index + 1}</span>
-                  <button type="button" className="btn" onClick={this.handleAdd} style={{ marginRight: '10px', backgroundColor: '#e53935' }}>+</button>
-                  <button type="button" className="btn" onClick={this.handleDelete} style={{ marginRight: '10px', backgroundColor: '#01579b' }}>-</button>
-                  <Link to={`/edit/${this.props.match.params.id}/${index + 1}`} className="avatar">
-                    <button type="button" className="btn">edit</button>
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-          <button className="btn waves-effect waves-light" type="submit" name="action" onClick={this.submit} style={{ backgroundColor: '#00838f' }}>
+          <button className="btn waves-effect waves-light right" type="submit" name="action" onClick={this.submit} style={{ backgroundColor: '#00838f' }}>
             Submit your edit
             <i className="material-icons right">send</i>
           </button>

@@ -20,7 +20,9 @@
 
 .thumbnail{
   height: 20vw;
-  width: 20vw;
+  width: 40vw;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .pageConfig, .centerCard{

@@ -82,15 +82,11 @@ class GameItem extends React.Component {
           <div className="card large" style={{ width: '70vw' }}>
             <div className="card-content">
               <span className="card-title">{this.props.item.name}</span>
-<<<<<<< HEAD
-              <img src={this.props.item.thumbnail} id={`thumb_${this.props.item.name}`} alt="game_thumbnail" className="thumbnail" />
-=======
               <span className="right">
                 id:
                 {this.props.item.id}
               </span>
               <img src={this.props.item.thumbnail} alt="game_thumbnail" className="thumbnail" />
->>>>>>> 04bbc52accf0738d54c5853b0eb17f8b5aad7511
               <p>
                 Question Number:
                 {this.state.length}

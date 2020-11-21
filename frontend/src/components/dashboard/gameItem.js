@@ -3,6 +3,7 @@
 import React from 'react';
 import M from 'materialize-css';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import Modal from 'react-modal';
 import timeTransform, { customStyles, targetUrl, Config } from '../../utils/utils';
@@ -26,6 +27,10 @@ class GameItem extends React.Component {
     const sum = time.reduce((a, b) => a + b, 0);
     const len = res.data.questions.length;
     this.setState({ time: sum, length: len });
+  }
+
+  advanceClick = () => {
+    this.props.AdvanceGame(this.props.item.id);
   }
 
   openModal = () => {
@@ -81,7 +86,7 @@ class GameItem extends React.Component {
       <div className="row">
         <div className="col s12 m12 l12">
           <div className="card large" style={{ width: '70vw' }}>
-            <div className="card-content">
+            <div className="card-content" style={{ overflow: 'scroll' }}>
               <span className="card-title">{this.props.item.name}</span>
               <span className="right">
                 id:
@@ -99,7 +104,7 @@ class GameItem extends React.Component {
               </p>
               {/* eslint-disable-next-line react/jsx-no-target-blank */}
               <a href={`game/${this.props.item.id}/${this.props.item.active}`} target="_blank">{this.props.item.active == null ? null : 'Go to Play the game!'}</a>
-              <div>{this.props.item.active == null ? '' : <button className="btn" onClick={() => AdvanceGame(this.props.item.id)} style={{ backgroundColor: 'purple' }} type="button">advance</button>}</div>
+              <div>{this.props.item.active == null ? '' : <button className="btn" onClick={this.advanceClick} style={{ backgroundColor: 'purple', marginBottom: '5vh' }} type="button">advance</button>}</div>
             </div>
             <div className="card-action">
               <button
@@ -137,5 +142,6 @@ class GameItem extends React.Component {
     );
   }
 }
-
-export default GameItem;
+export default connect(null, { AdvanceGame })(
+  GameItem,
+);

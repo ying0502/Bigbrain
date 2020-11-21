@@ -1,10 +1,11 @@
 /* eslint-disable import/prefer-default-export */
 import M from 'materialize-css';
-// import axios from 'axios';
+import axios from 'axios';
 import {
   QUIZ_NUMBER,
+  ADVANCE,
 } from './actionTypes';
-import { targetUrl } from '../utils/utils';
+import { targetUrl, Config } from '../utils/utils';
 
 // Update information of fame
 export const UpdateGame = (quizId, payload) => (dispatch) => {
@@ -41,26 +42,7 @@ export const UpdateGame = (quizId, payload) => (dispatch) => {
   });
 };
 
-// DeleteGame
-// export const AdvanceGame = async (
-//   ID,
-// ) => {
-//   try {
-//     console.log(Config, ID);
-//     await axios.post(`${targetUrl}admin/quiz/${ID}/advance`, Config);
-//     M.toast({
-//       html: 'Advance success',
-//       classes: 'rounded',
-//     });
-//   } catch (err) {
-//     M.toast({
-//       html: err.response.data.error,
-//       classes: 'rounded',
-//     });
-//   }
-// };
-
-export const AdvanceGame = (quizId) => {
+export const AdvanceGame = (quizId) => (dispatch) => {
   fetch(`${targetUrl}admin/quiz/${quizId}/advance`, {
     method: 'POST',
     headers: {
@@ -68,7 +50,6 @@ export const AdvanceGame = (quizId) => {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
   }).then((result) => {
-    console.log(result);
     if (result.status === 200) {
       M.toast({
         html: 'Advance game Success',
@@ -80,8 +61,55 @@ export const AdvanceGame = (quizId) => {
         classes: 'rounded',
       });
     }
+    return result.json();
+  }).then((res) => {
+    console.log(res);
+    dispatch({
+      type: ADVANCE,
+      payload: res,
+    });
   }).catch((err) => {
     console.log(err);
     M.toast({ html: 'Fetch fail', classes: 'rounded' });
   });
+};
+
+// player start Game
+export const startGame = async (
+  ID,
+) => {
+  try {
+    const resStatus = await axios.get(`${targetUrl}play/${Number(ID)}/status`, Config);
+    if (resStatus.data) {
+      M.toast({
+        html: 'start success',
+        classes: 'rounded',
+      });
+    }
+    const res = await axios.get(`${targetUrl}play/${Number(ID)}/question`, Config);
+    M.toast({
+      html: 'get question success',
+      classes: 'rounded',
+    });
+    console.log(res.data);
+    return res.data;
+  } catch (err) {
+    M.toast({
+      html: err.response.data.error,
+      classes: 'rounded',
+    });
+  }
+  return '';
+};
+
+export const startGameRefresh = async (
+  ID,
+) => {
+  try {
+    const res = await axios.get(`${targetUrl}play/${Number(ID)}/question`, Config);
+    return res.data;
+  } catch (err) {
+    //
+  }
+  return '';
 };

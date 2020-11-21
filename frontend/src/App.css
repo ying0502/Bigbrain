@@ -44,6 +44,10 @@
   margin-left: 5vw;
 }
 
+.answ {
+  margin-left: 10vw;
+}
+
 .avatar:link {
   color: #000000;
 } /* 未访问链接*/

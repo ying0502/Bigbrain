@@ -83,7 +83,7 @@ const SessionPage = (props) => {
       </div>
 
       {StartQuiz
-        ? <QuestionItem playerId={props.playerId} data={Data} newQues={() => handleClick()} /> : ''}
+        ? <QuestionItem playerId={props.playerId} data={Data} newQues={() => handleClickRefresh()} /> : ''}
     </div>
 
   );

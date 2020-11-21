@@ -21,11 +21,9 @@ class GameItem extends React.Component {
   async componentDidMount() {
     // get EachQuiZ
     const res = await axios.get(`${targetUrl}admin/quiz/${this.props.item.id}`, Config);
-    console.log(res.data.questions);
     const time = res.data.questions.map((item) => Number(item.duration));
     const sum = time.reduce((a, b) => a + b, 0);
     const len = res.data.questions.length;
-    console.log(sum);
     this.setState({ time: sum, length: len });
   }
 

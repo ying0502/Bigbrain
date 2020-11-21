@@ -19,6 +19,7 @@ Modal.setAppElement('#root');
 const Narvbar = ({ isLoggedIn, logOut }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalIsOpen1, setIsOpen1] = useState(false);
+
   const openModal = () => {
     setIsOpen(true);
   };
@@ -44,7 +45,7 @@ const Narvbar = ({ isLoggedIn, logOut }) => {
             onRequestClose={closeModal1}
             style={customStyles}
           >
-            <Delete />
+            <Delete closeModal={closeModal1} />
           </Modal>
           <li className="avatar" onClick={openModal}>create</li>
           <Modal
@@ -52,7 +53,7 @@ const Narvbar = ({ isLoggedIn, logOut }) => {
             onRequestClose={closeModal}
             style={customStyles}
           >
-            <Create />
+            <Create closeModal={closeModal} />
           </Modal>
           <li>
             <Link to="/dashboard" className="avatar">

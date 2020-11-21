@@ -2,7 +2,7 @@
 import M from 'materialize-css';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { createGame } from '../../actions/admin';
+import { createGame, getQuiz } from '../../actions/admin';
 
 const Create = (props) => {
   const [name, setName] = useState('');
@@ -12,6 +12,8 @@ const Create = (props) => {
     if (props.quizId) {
       M.toast({ html: 'Create Quiz Success', classes: 'rounded' });
     }
+    props.closeModal();
+    await props.getQuiz();
   };
 
   const handleonChange = (e) => {
@@ -43,6 +45,6 @@ const Create = (props) => {
 const mapStateToProps = (state) => ({
   quizId: state.admin.quizId,
 });
-export default connect(mapStateToProps, { createGame })(
+export default connect(mapStateToProps, { createGame, getQuiz })(
   Create,
 );

@@ -2,11 +2,13 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/state-in-constructor */
 /* eslint-disable prefer-template */
+/* eslint-disable  react/jsx-one-expression-per-line */
 /* eslint-disable  react/no-access-state-in-setstate */
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getEachQuiz, UpdateGame } from '../../actions/admin';
+import { getEachQuiz } from '../../actions/admin';
+import { UpdateGame } from '../../actions/quiz';
 
 class EditGame extends React.Component {
   state = {
@@ -30,7 +32,7 @@ class EditGame extends React.Component {
     console.log(`newThumbnail: ${this.state.newThumbNail}`);
     const CurrentGameId = this.props.match.params.id;
     const questionList = [];
-    for (let i = 1; i <= this.state.question; i += 1) {
+    for (let i = 1; i <= this.state.questions.length; i += 1) {
       const questionInfo = {
         name: localStorage.getItem(`${CurrentGameId}_${i}_Info_name`),
         duration: localStorage.getItem(`${CurrentGameId}_${i}_Info_duration`),
@@ -52,7 +54,7 @@ class EditGame extends React.Component {
     };
     console.log(this.state.question);
     console.log(payLoad);
-    UpdateGame(`${this.props.match.params.id}`, payLoad);
+    this.props.UpdateGame(`${this.props.match.params.id}`, payLoad);
   }
 
   handleNameChange = (e) => {
@@ -74,10 +76,10 @@ class EditGame extends React.Component {
     this.setState({ questions: this.state.questions });
   }
 
-  handleDelete = () => {
+  handleDelete = (num) => {
     if (this.state.questions.length > 1) {
       this.setState({ question: this.state.question - 1 });
-      this.state.questions.pop();
+      this.setState({ questions: this.state.questions.splice(num, 1) });
     }
     this.setState({ questions: this.state.questions });
     const CurrentGameId = this.props.match.params.id;
@@ -104,14 +106,14 @@ class EditGame extends React.Component {
           <h2>Game Edit</h2>
           New Name:
           <input style={{ width: '350px' }} value={this.state.newName} onChange={this.handleNameChange} placeholder="Change the name of current quiz" id="New_name_1" type="text" className="validate" />
-          <form action="#">
+          <form>
             <div className="file-field input-field">
-              <div className="btn">
-                <span>Update the thumbnail</span>
+              <div>
+                <span className="btn">Update the thumbnail</span>
                 <input type="file" multiple onChange={this.handleThumbnailChange} />
               </div>
               <div className="file-path-wrapper">
-                <input style={{ width: '350px' }} value={this.state.newThumbNail} id="thumbnailUpdate1" type="text" placeholder="only *.jpg and *.png will be accepted" />
+                <input style={{ width: '350px' }} value={this.state.newThumbNail} id="thumbnailUpdate1" placeholder="only *.jpg and *.png will be accepted" />
               </div>
             </div>
           </form>
@@ -121,7 +123,7 @@ class EditGame extends React.Component {
               <div className="row">
                 <div className="input-field col s12">
                   {/* 显示上次的信息 question */}
-                  <input id="input_text" type="text" data-length="30" placeholder={item[index]} />
+                  <span>Question ${index + 1}</span>
                   <button type="button" className="btn" onClick={this.handleAdd} style={{ marginRight: '10px', backgroundColor: '#e53935' }}>+</button>
                   <button type="button" className="btn" onClick={this.handleDelete} style={{ marginRight: '10px', backgroundColor: '#01579b' }}>-</button>
                   <Link to={`/edit/${this.props.match.params.id}/${index + 1}`} className="avatar">
@@ -142,44 +144,39 @@ class EditGame extends React.Component {
 
   renderQuestions() {
     return (
-      <div className="pageConfig">
-        <div>
-          <h2>Game Edit</h2>
-          New Name:
-          <input style={{ width: '250px' }} value={this.state.newName} onChange={this.handleNameChange} placeholder="Change the name of current quiz if you wanna to " id="New_name_2" type="text" />
-          <form action="#">
-            <div className="file-field input-field">
-              <div className="btn">
-                <span>Update the thumbnail</span>
-                <input type="file" multiple onChange={this.handleThumbnailChange} />
+      <div className="pageConfig question">
+        <div className="row">
+          <h2>Game Edit<span className="tips"><i>remember: add your questions first then update the thumbnail</i></span></h2>
+          <form className="col l6">
+            <div className="">TOTAL QUESTIONS: {this.state.questions.length}</div>
+            {this.state.questions.map((item, index) => (
+              <div className="input-field">
+                {/* 显示上次的信息 question */}
+                <span className="question">Question {index + 1}</span>
+                <button type="button" className="btn" onClick={this.handleAdd} style={{ marginRight: '10px', backgroundColor: '#e53935' }}>add</button>
+                <button type="button" className="btn" onClick={() => this.handleDelete(index)} style={{ marginRight: '10px', backgroundColor: '#01579b' }}>delete</button>
+                <Link to={`/edit/${this.props.match.params.id}/${index + 1}`} className="avatar">
+                  <button type="button" className="btn">edit</button>
+                </Link>
               </div>
+            ))}
+            <button type="button" className="btn" onClick={this.submit} style={{ marginRight: '10px' }}>save yout question before edit</button>
+          </form>
+
+          <form className="col l6">
+            <div>
+              New Name:
+              <input value={this.state.newName} onChange={this.handleNameChange} placeholder="Change the name of current quiz if you wanna to " id="New_name_2" type="text" />
+            </div>
+            <div className="file-field input-field">
+              Update the thumbnail：
+              <input type="file" multiple onChange={this.handleThumbnailChange} />
               <div className="file-path-wrapper">
-                <input style={{ width: '260px' }} id="thumbnailUpdate2" value={this.state.newThumbNail} type="text" placeholder="only *.jpg and *.png will be accepted" />
+                <input id="thumbnailUpdate2" value={this.state.newThumbNail} type="text" placeholder="only *.jpg and *.png will be accepted" />
               </div>
             </div>
           </form>
-          <div>
-            current question number:
-            {this.state.questions.length}
-            <div className="row">
-              <form className="col s6">
-                {this.state.questions.map((item, index) => (
-                  <div className="row">
-                    <div className="input-field col s12">
-                      {/* 显示上次的信息 question */}
-                      <input id="input_text" type="text" data-length="30" value={`Question ${index + 1}`} />
-                      <button type="button" className="btn" onClick={this.handleAdd} style={{ marginRight: '10px', backgroundColor: '#e53935' }}>+</button>
-                      <button type="button" className="btn" onClick={this.handleDelete} style={{ marginRight: '10px', backgroundColor: '#01579b' }}>-</button>
-                      <Link to={`/edit/${this.props.match.params.id}/${index + 1}`} className="avatar">
-                        <button type="button" className="btn">edit</button>
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-              </form>
-            </div>
-          </div>
-          <button className="btn waves-effect waves-light" type="submit" name="action" onClick={this.submit} style={{ backgroundColor: '#00838f' }}>
+          <button className="btn waves-effect waves-light right" type="submit" name="action" onClick={this.submit} style={{ backgroundColor: '#00838f' }}>
             Submit your edit
             <i className="material-icons right">send</i>
           </button>
@@ -199,8 +196,9 @@ class EditGame extends React.Component {
 }
 const mapStateToProps = (state) => ({
   allQuestions: state.admin.allQuestions,
+  quizNumber: state.quiz.quizNumber,
 });
 
-export default connect(mapStateToProps, { getEachQuiz })(
+export default connect(mapStateToProps, { getEachQuiz, UpdateGame })(
   EditGame,
 );

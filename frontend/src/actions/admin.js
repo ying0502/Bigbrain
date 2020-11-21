@@ -47,9 +47,16 @@ const DeleteGame = ({
       type: DELETE_GAME,
       payload: res.data,
     });
-    console.log(res.data);
+
+    M.toast({
+      html: 'Delete success',
+      classes: 'rounded',
+    });
   } catch (err) {
-    console.log(err);
+    M.toast({
+      html: err.response.data.error,
+      classes: 'rounded',
+    });
   }
 };
 
@@ -83,7 +90,7 @@ const getEachQuiz = (quizId) => async (dispatch) => {
 };
 
 // start new session
-function StartNewSession(quizId) {
+const StartNewSession = (quizId) => {
   fetch(`${targetUrl}admin/quiz/${quizId}/start`, {
     method: 'POST',
     headers: {
@@ -127,7 +134,7 @@ function StartNewSession(quizId) {
       classes: 'rounded',
     });
   });
-}
+};
 
 // end a session
 function endSession(quizId) {
@@ -160,7 +167,7 @@ function endSession(quizId) {
 }
 
 // Update information of fame
-function UpdateGame(quizId, payload) {
+const UpdateGame = (quizId, payload) => {
   console.log(payload);
   fetch(`${targetUrl}admin/quiz/${quizId}`, {
     method: 'PUT',
@@ -188,7 +195,7 @@ function UpdateGame(quizId, payload) {
     console.log(err);
     M.toast({ html: 'Fetch fail', classes: 'rounded' });
   });
-}
+};
 
 // get session results
 function GetSessionResult(sessionId) {

@@ -16,3 +16,7 @@ export const DELETE_GAME = 'DELETE_GAME';
 export const GET_EACH_QUIZ = 'GET_EACH_QUIZ';
 
 export const GET_PLAYER_ID = 'GET_PLAYER_ID';
+
+export const UPDATE_GAME = 'UPDATE_GAME';
+
+export const QUIZ_NUMBER = 'QUIZ_NUMBER';

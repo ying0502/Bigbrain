@@ -11,7 +11,7 @@ const SessionPage = (props) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     const sessionID = window.location.pathname.split('/')[3];
     console.log(Name);
     console.log(sessionID);
@@ -22,9 +22,9 @@ const SessionPage = (props) => {
       });
     } else {
       // eslint-disable-next-line react/prop-types
-      props.PlayerJoin(sessionID, Name);
+      await props.PlayerJoin(sessionID, Name);
       // eslint-disable-next-line react/prop-types
-      // console.log(props.playerId);
+      console.log(props.playerId);
     }
     e.preventDefault();
   };

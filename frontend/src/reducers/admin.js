@@ -10,7 +10,6 @@ export default function (state = {}, action) {
     case GET_QUIZ:
     case DELETE_GAME:
     case GET_PLAYER_ID:
-
       return {
         ...state,
         ...payload,

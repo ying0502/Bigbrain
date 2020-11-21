@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/no-access-state-in-setstate */
 import React from 'react';
 import { connect } from 'react-redux';
 import GameItem from './gameItem';
@@ -16,11 +17,15 @@ class Dashboard extends React.Component {
     });
   }
 
+  reRender = () => {
+    this.props.getQuiz();
+  }
+
   render() {
     return (
-      <div>
+      <div className="centerCard">
         {this.props.quizzes && this.props.quizzes.length > 0 ? this.props.quizzes.map((item) => (
-          <GameItem item={item} key={item.id} />
+          <GameItem item={item} key={item.id} reRender={this.reRender} />
         )) : <div>no quiz now</div>}
       </div>
     );

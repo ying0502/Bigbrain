@@ -3,17 +3,30 @@
 import React from 'react';
 import M from 'materialize-css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Modal from 'react-modal';
-import timeTransform, { customStyles, targetUrl } from '../../utils/utils';
+import timeTransform, { customStyles, targetUrl, Config } from '../../utils/utils';
 import { StartNewSession } from '../../actions/admin';
 
 class GameItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      a: '',
       modalIsOpen: false,
+      length: '',
+      time: '',
     };
+  }
+
+  async componentDidMount() {
+    // get EachQuiZ
+    const res = await axios.get(`${targetUrl}admin/quiz/${this.props.item.id}`, Config);
+    console.log(res.data.questions);
+    const time = res.data.questions.map((item) => Number(item.duration));
+    const sum = time.reduce((a, b) => a + b, 0);
+    const len = res.data.questions.length;
+    console.log(sum);
+    this.setState({ time: sum, length: len });
   }
 
   openModal = () => {
@@ -22,6 +35,15 @@ class GameItem extends React.Component {
 
   closeModal = () => {
     this.setState({ modalIsOpen: false });
+  }
+
+  handleClick = () => {
+    if (this.props.item.active == null) {
+      StartNewSession(this.props.item.id);
+    } else {
+      this.EndSession(this.props.item.id);
+    }
+    this.props.reRender();
   }
 
   EndSession = (quizId) => {
@@ -56,21 +78,25 @@ class GameItem extends React.Component {
   }
 
   render() {
-    const { a } = this.state;
     return (
       <div className="row">
-        <div className="col s12 l6">
-          <div className="card">
-            <span className="card-image" />
+        <div className="col s12 m12 l12">
+          <div className="card large" style={{ width: '70vw' }}>
             <div className="card-content">
               <span className="card-title">{this.props.item.name}</span>
+              <span className="right">
+                id:
+                {this.props.item.id}
+              </span>
               <img src={this.props.item.thumbnail} alt="game_thumbnail" className="thumbnail" />
               <p>
-                Question Number: 0
-                {a}
+                Question Number:
+                {this.state.length}
               </p>
               <p>
-                Total time to complete: 1 min
+                Total time to complete:
+                {!this.state.time ? 0 : this.state.time}
+                s
               </p>
               {/* eslint-disable-next-line react/jsx-no-target-blank */}
               <a href={`game/${this.props.item.id}/${this.props.item.active}`} target="_blank">{this.props.item.active == null ? null : 'Go to Play the game!'}</a>
@@ -78,13 +104,14 @@ class GameItem extends React.Component {
             <div className="card-action">
               <button
                 /* eslint-disable-next-line max-len */
-                onClick={() => (this.props.item.active == null ? StartNewSession(this.props.item.id) : this.EndSession(this.props.item.id))}
+                onClick={this.handleClick}
                 className="btn"
                 type="button"
                 style={{ marginRight: '5px', backgroundColor: '#00838f' }}
               >
                 {this.props.item.active == null ? 'start the game' : 'close the game'}
               </button>
+              {this.props.item.active}
               <Modal
                 isOpen={this.state.modalIsOpen}
                 onRequestClose={this.closeModal}

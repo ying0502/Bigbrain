@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { DeleteGame } from '../../actions/admin';
+import { DeleteGame, getQuiz } from '../../actions/admin';
 
 const Delete = (props) => {
   const [ID, setID] = useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
     await props.DeleteGame({ ID });
+    props.closeModal();
+    await props.getQuiz();
   };
   const handleChange = (e) => {
     setID(e.target.value);
@@ -35,6 +37,6 @@ const Delete = (props) => {
   );
 };
 
-export default connect(null, { DeleteGame })(
+export default connect(null, { DeleteGame, getQuiz })(
   Delete,
 );

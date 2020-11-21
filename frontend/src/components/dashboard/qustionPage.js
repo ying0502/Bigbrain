@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
+import React, { useEffect } from 'react';
 import M from 'materialize-css';
 // import { createNewQuestion } from '../../actions/admin';
 
@@ -16,7 +17,9 @@ export default function QuestionPage() {
   const [answer3, setAnswer3] = React.useState(localStorage.getItem(`${GameId}_${QuesId}_Info_Answer3`));
   const [answer4, setAnswer4] = React.useState(localStorage.getItem(`${GameId}_${QuesId}_Info_Answer4`));
 
-  M.AutoInit();
+  useEffect(() => {
+    M.AutoInit();
+  });
 
   const handleSave = (event) => {
     localStorage.setItem(`${GameId}_${QuesId}_Info_name`, name);
@@ -33,7 +36,9 @@ export default function QuestionPage() {
       html: 'Save Update Success',
       classes: 'rounded',
     });
+    // props.location.state.handleRefresh();
     event.preventDefault();
+    window.history.back();
   };
 
   const pagePrior = (
@@ -166,7 +171,7 @@ export default function QuestionPage() {
             <option value="answer4">Answer 4</option>
           </select>
         </div>
-        <input type="submit" value="Save" className="btn waves-effect waves-light" onClick={handleSave} />
+        <input type="submit" value="Save" className="btn waves-effect waves-light" onClick={(event) => handleSave(event)} />
       </div>
     );
   }
@@ -196,7 +201,9 @@ export default function QuestionPage() {
           <option value="answer4">Answer 4</option>
         </select>
       </div>
-      <input type="submit" value="Save" className="btn waves-effect waves-light" onClick={handleSave} />
+
+      <input type="submit" value="Save" className="btn waves-effect waves-light" onClick={(event) => handleSave(event)} />
+
     </div>
   );
 }

@@ -14,6 +14,7 @@ import Narvbar from './components/homePage/narvbar';
 import HomePage from './components/homePage/homePage';
 import EditGame from './components/dashboard/editGame';
 import SessionPage from './components/Player/SessionPage';
+import MyResult from './components/Player/MyResult';
 
 // import { LogoutButton } from './Logout_button';
 /* eslint-disable react/destructuring-assignment */
@@ -30,6 +31,7 @@ function App() {
         <Route exact path="/edit/:gid/:qid" component={QuestionPage} />
         <Route exact path="/game/:gid/:sid" component={SessionPage} />
         <Route exact path="/result/:sid"><div>This is your result!</div></Route>
+        <Route exact path="/myresult/:pid" component={MyResult} />
       </Switch>
     </Router>
   );

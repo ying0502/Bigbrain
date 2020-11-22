@@ -53,6 +53,12 @@
   margin-left: 10vw;
 }
 
+.res {
+  margin: 10vw;
+  font-size: large;
+  color: black
+}
+
 .avatar:link {
   color: #000000;
 } /* 未访问链接*/

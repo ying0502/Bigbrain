@@ -4,12 +4,14 @@
 /* eslint-disable  consistent-return */
 import React, { useEffect, useState } from 'react';
 import M from 'materialize-css';
+import { putAnsw } from '../../actions/quiz';
+// import axios from 'axios';
 
 const QuestionItem = (props) => {
   const [countDown, setCountDown] = useState(props.data.duration);
   const [showAnsw, setShowAnsw] = useState(false);
 
-  const getFormData = () => {
+  const getFormData = async () => {
     const data = document.getElementsByTagName('input');
     const answerIds = [];
     Array.from(data).forEach((item) => {
@@ -17,6 +19,9 @@ const QuestionItem = (props) => {
         answerIds.push(item.value);
       }
     });
+    if (answerIds.length !== 0) {
+      await putAnsw(props.playerId, answerIds);
+    }
   };
 
   useEffect(() => {
@@ -24,12 +29,11 @@ const QuestionItem = (props) => {
   });
 
   useEffect(() => {
-    const id = setTimeout(() => {
+    const id = setTimeout(async () => {
       if (countDown > 0) {
+        await getFormData();
         setCountDown((c) => c - 1);
       } else if (countDown === 0) {
-        // send request
-        getFormData();
         setShowAnsw(true);
       }
     }, 1000);
@@ -56,46 +60,25 @@ const QuestionItem = (props) => {
     <form className="form">
       <p>
         <label htmlFor="test1">
-          <input
-            type="checkbox"
-            id="test1"
-            style={{ opacity: '1' }}
-            className="filled-in"
-          />
+          <input type="checkbox" id="test1" style={{ opacity: '1' }} className="filled-in" value="answers1" />
           <span>{props.data.answers1}</span>
         </label>
       </p>
       <p>
         <label htmlFor="test2">
-          <input
-            type="checkbox"
-            id="test2"
-            style={{ opacity: '1' }}
-            className="filled-in"
-          />
+          <input type="checkbox" id="test2" style={{ opacity: '1' }} className="filled-in" value="answers2" />
           <span>{props.data.answers2}</span>
         </label>
       </p>
       <p>
         <label htmlFor="test3">
-          <input
-            type="checkbox"
-            id="test3"
-            style={{ opacity: '1' }}
-            className="filled-in"
-          />
+          <input type="checkbox" id="test3" style={{ opacity: '1' }} className="filled-in" value="answers3" />
           <span>{props.data.answers3}</span>
         </label>
       </p>
       <p>
         <label htmlFor="test4">
-          <input
-            type="checkbox"
-            id="test4"
-            style={{ opacity: '1' }}
-            className="filled-in"
-            value={props.data.answers4}
-          />
+          <input type="checkbox" id="test4" style={{ opacity: '1' }} className="filled-in" value="answers4" />
           <span>{props.data.answers4}</span>
         </label>
       </p>
@@ -106,45 +89,25 @@ const QuestionItem = (props) => {
     <form>
       <p>
         <label htmlFor="test1">
-          <input
-            type="radio"
-            name="group1"
-            id="test1"
-            style={{ opacity: '1' }}
-          />
+          <input type="radio" name="group1" id="test1" style={{ opacity: '1' }} value="answers1" />
           <span>{props.data.answers1}</span>
         </label>
       </p>
       <p>
         <label htmlFor="test2">
-          <input
-            type="radio"
-            name="group1"
-            id="test2"
-            style={{ opacity: '1' }}
-          />
+          <input type="radio" name="group1" id="test2" style={{ opacity: '1' }} value="answers2" />
           <span>{props.data.answers2}</span>
         </label>
       </p>
       <p>
         <label htmlFor="test3">
-          <input
-            type="radio"
-            name="group1"
-            id="test3"
-            style={{ opacity: '1' }}
-          />
+          <input type="radio" name="group1" id="test3" style={{ opacity: '1' }} value="answers3" />
           <span>{props.data.answers3}</span>
         </label>
       </p>
       <p>
         <label htmlFor="test4">
-          <input
-            type="radio"
-            name="group1"
-            id="test4"
-            style={{ opacity: '1' }}
-          />
+          <input type="radio" name="group1" id="test4" style={{ opacity: '1' }} value="answers4" />
           <span>{props.data.answers4}</span>
         </label>
       </p>

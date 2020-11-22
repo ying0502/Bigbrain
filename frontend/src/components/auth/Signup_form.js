@@ -1,6 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-/* eslint-disable import/no-extraneous-dependencies */
 import { Redirect } from 'react-router';
 import M from 'materialize-css';
 import { register } from '../../actions/auth';
@@ -21,8 +23,6 @@ class SignupForm extends React.Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     const { email, password, name } = this.state;
-    /* eslint-disable react/destructuring-assignment */
-    /* eslint-disable react/prop-types */
     await this.props.register({ name, email, password });
     if (this.props.isAuthenticated) {
       M.toast({ html: registerSuccess, classes: 'rounded' });
@@ -33,12 +33,11 @@ class SignupForm extends React.Component {
     return null;
   }
 
-  handleonChange = (event) => {
+  handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   }
 
   render() {
-    /* eslint-disable no-trailing-spaces */
     const {
       name, email, password, redirectTag,
     } = this.state;
@@ -49,11 +48,11 @@ class SignupForm extends React.Component {
       <form className="form" onSubmit={this.handleSubmit}>
         <h2>User Signup</h2>
         Email:
-        <input type="email" name="email" value={email} onChange={this.handleonChange} />
+        <input type="email" name="email" value={email} onChange={this.handleChange} />
         Password:
-        <input type="password" name="password" value={password} onChange={this.handleonChange} />
+        <input type="password" name="password" value={password} onChange={this.handleChange} />
         Name:
-        <input type="text" name="name" value={name} onChange={this.handleonChange} />
+        <input type="text" name="name" value={name} onChange={this.handleChange} />
         <input type="submit" value="Submit" className="btn waves-effect waves-light" />
       </form>
     );

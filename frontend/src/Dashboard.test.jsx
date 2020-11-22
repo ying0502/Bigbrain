@@ -2,7 +2,7 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { shallow, configure } from 'enzyme';
 // import { render, screen } from '@testing-library/react';
-import Dashboard from './components/dashboard/Dashboard';
+import { Dashboard } from './components/dashboard/Dashboard';
 
 configure({ adapter: new Adapter() });
 

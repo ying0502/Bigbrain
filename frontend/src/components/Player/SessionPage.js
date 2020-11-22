@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
@@ -7,8 +9,6 @@ import { PlayerJoin } from '../../actions/admin';
 import { startGame, startGameRefresh } from '../../actions/quiz';
 import QuestionItem from './question';
 
-/* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
 const SessionPage = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(true);
   const [StartQuiz, setStartQuiz] = React.useState(false);
@@ -80,7 +80,12 @@ const SessionPage = (props) => {
             placeholder="Input your name to join the session now!"
           />
         </div>
-        <input type="submit" value="join" className="btn waves-effect waves-light" onClick={handleSubmit} />
+        <input
+          type="submit"
+          value="join"
+          className="btn waves-effect waves-light"
+          onClick={handleSubmit}
+        />
       </Modal>
 
       {/* player start game */}
@@ -91,7 +96,13 @@ const SessionPage = (props) => {
       </div>
 
       {StartQuiz
-        ? <QuestionItem playerId={props.playerId} data={Data} newQues={() => handleClickRefresh()} /> : ''}
+        ? (
+          <QuestionItem
+            playerId={props.playerId}
+            data={Data}
+            newQues={() => handleClickRefresh()}
+          />
+        ) : ''}
     </div>
 
   );

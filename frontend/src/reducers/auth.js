@@ -6,8 +6,6 @@ import {
   LOGOUT,
 } from '../actions/actionTypes';
 
-// import { targetUrl, config } from '../utils/utils';
-
 const initialState = {
   token: null,
   isAuthenticated: null,

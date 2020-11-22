@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-
+/* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
@@ -9,13 +9,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
-import { logOut } from '../../actions/auth';
 import Create from '../dashboard/createGame';
 import Delete from '../dashboard/deleteGame';
+import { logOut } from '../../actions/auth';
 import { customStyles } from '../../utils/utils';
 
 Modal.setAppElement('#root');
-/* eslint-disable-next-line no-shadow */
 const Narvbar = ({ isLoggedIn, logOut }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalIsOpen1, setIsOpen1] = useState(false);
@@ -61,8 +60,13 @@ const Narvbar = ({ isLoggedIn, logOut }) => {
             </Link>
           </li>
           <li>
-            <Link to="/" onClick={logOut} className="avatar">
-              logout
+            <Link
+              to="/"
+              onClick={logOut}
+              className="avatar"
+            >
+              logOut
+
             </Link>
           </li>
         </ul>
@@ -95,7 +99,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  logOut,
+  logOut
+
+  ,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Narvbar);

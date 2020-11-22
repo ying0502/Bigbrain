@@ -22,7 +22,7 @@ const Delete = (props) => {
       <div className="input-field">
         <input
           type="text"
-          placeholder="Input the game ID to delete"
+          placeholder="Input the Game ID to delete"
           onChange={(e) => handleChange(e)}
           required
         />

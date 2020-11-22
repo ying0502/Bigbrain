@@ -6,29 +6,32 @@ import { createGame, getQuiz } from '../../actions/admin';
 
 const Create = (props) => {
   const [name, setName] = useState('');
-  const handleonSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     await props.createGame({ name });
     if (props.quizId) {
-      M.toast({ html: 'Create Quiz Success', classes: 'rounded' });
+      M.toast({
+        html: 'Create Quiz Success',
+        classes: 'rounded',
+      });
     }
     props.closeModal();
     await props.getQuiz();
   };
 
-  const handleonChange = (e) => {
+  const handleChange = (e) => {
     setName(e.target.value);
   };
   return (
     <form
       className="col s12"
-      onSubmit={(e) => handleonSubmit(e)}
+      onSubmit={(e) => handleSubmit(e)}
     >
       <div className="input-field">
         <input
           type="text"
           placeholder="Input your game names"
-          onChange={(e) => handleonChange(e)}
+          onChange={(e) => handleChange(e)}
           required
         />
       </div>

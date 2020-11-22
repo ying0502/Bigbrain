@@ -14,6 +14,7 @@ class EditGame extends React.Component {
   state = {
     question: 1,
     questions: [1],
+    // get the previous name from localStorage
     newName: localStorage.getItem(`game_${this.props.match.params.id}_name`),
     newThumbNail: localStorage.getItem(`game_${this.props.match.params.id}_thumbnail`),
   }
@@ -28,22 +29,40 @@ class EditGame extends React.Component {
 
   submit = (event) => {
     event.preventDefault();
-    console.log(`newName: ${this.state.newName}`);
-    console.log(`newThumbnail: ${this.state.newThumbNail}`);
     const CurrentGameId = this.props.match.params.id;
     const questionList = [];
     for (let i = 1; i <= this.state.questions.length; i += 1) {
       const questionInfo = {
-        name: localStorage.getItem(`${CurrentGameId}_${i}_Info_name`),
-        duration: localStorage.getItem(`${CurrentGameId}_${i}_Info_duration`),
-        points: localStorage.getItem(`${CurrentGameId}_${i}_Info_points`),
-        questionType: localStorage.getItem(`${CurrentGameId}_${i}_Info_questionType`),
-        videoLink: localStorage.getItem(`${CurrentGameId}_${i}_Info_videoLink`),
-        correctAnswer: localStorage.getItem(`${CurrentGameId}_${i}_Info_correctAnswer`),
-        answers1: localStorage.getItem(`${CurrentGameId}_${i}_Info_Answer1`),
-        answers2: localStorage.getItem(`${CurrentGameId}_${i}_Info_Answer2`),
-        answers3: localStorage.getItem(`${CurrentGameId}_${i}_Info_Answer3`),
-        answers4: localStorage.getItem(`${CurrentGameId}_${i}_Info_Answer4`),
+        name: localStorage.getItem(
+          `${CurrentGameId}_${i}_Info_name`
+        ),
+        duration: localStorage.getItem(
+          `${CurrentGameId}_${i}_Info_duration`
+        ),
+        points: localStorage.getItem(
+          `${CurrentGameId}_${i}_Info_points`
+        ),
+        questionType: localStorage.getItem(
+          `${CurrentGameId}_${i}_Info_questionType`
+        ),
+        videoLink: localStorage.getItem(
+          `${CurrentGameId}_${i}_Info_videoLink`
+        ),
+        correctAnswer: localStorage.getItem(
+          `${CurrentGameId}_${i}_Info_correctAnswer`
+        ),
+        answers1: localStorage.getItem(
+          `${CurrentGameId}_${i}_Info_Answer1`
+        ),
+        answers2: localStorage.getItem(
+          `${CurrentGameId}_${i}_Info_Answer2`
+        ),
+        answers3: localStorage.getItem(
+          `${CurrentGameId}_${i}_Info_Answer3`
+        ),
+        answers4: localStorage.getItem(
+          `${CurrentGameId}_${i}_Info_Answer4`
+        ),
       };
       questionList.push(questionInfo);
     }
@@ -52,8 +71,6 @@ class EditGame extends React.Component {
       name: this.state.newName,
       thumbnail: this.state.newThumbNail,
     };
-    console.log(this.state.question);
-    console.log(payLoad);
     this.props.UpdateGame(`${this.props.match.params.id}`, payLoad);
   }
 
@@ -85,57 +102,130 @@ class EditGame extends React.Component {
     const CurrentGameId = this.props.match.params.id;
     const i = this.state.question + 1;
     if (`${CurrentGameId}_${i}_Info_name` in localStorage) {
-      localStorage.removeItem(`${CurrentGameId}_${i}_Info_name`);
-      localStorage.removeItem(`${CurrentGameId}_${i}_Info_duration`);
-      localStorage.removeItem(`${CurrentGameId}_${i}_Info_points`);
-      localStorage.removeItem(`${CurrentGameId}_${i}_Info_questionType`);
-      localStorage.removeItem(`${CurrentGameId}_${i}_Info_videoLink`);
-      localStorage.removeItem(`${CurrentGameId}_${i}_Info_correctAnswer`);
-      localStorage.removeItem(`${CurrentGameId}_${i}_Info_Answer1`);
-      localStorage.removeItem(`${CurrentGameId}_${i}_Info_Answer2`);
-      localStorage.removeItem(`${CurrentGameId}_${i}_Info_Answer3`);
-      localStorage.removeItem(`${CurrentGameId}_${i}_Info_Answer4`);
+      localStorage.removeItem(
+        `${CurrentGameId}_${i}_Info_name`
+      );
+      localStorage.removeItem(
+        `${CurrentGameId}_${i}_Info_duration`
+      );
+      localStorage.removeItem(
+        `${CurrentGameId}_${i}_Info_points`
+      );
+      localStorage.removeItem(
+        `${CurrentGameId}_${i}_Info_questionType`
+      );
+      localStorage.removeItem(
+        `${CurrentGameId}_${i}_Info_videoLink`
+      );
+      localStorage.removeItem(
+        `${CurrentGameId}_${i}_Info_correctAnswer`
+      );
+      localStorage.removeItem(
+        `${CurrentGameId}_${i}_Info_Answer1`
+      );
+      localStorage.removeItem(
+        `${CurrentGameId}_${i}_Info_Answer2`
+      );
+      localStorage.removeItem(
+        `${CurrentGameId}_${i}_Info_Answer3`
+      );
+      localStorage.removeItem(
+        `${CurrentGameId}_${i}_Info_Answer4`
+      );
     }
   }
 
   renderNoQuestions() {
-    // console.log(this.state.questions);
     return (
       <div className="pageConfig question">
         <div className="row">
-          <h2>Game Edit<span className="tips"><i>remember: add your questions first then update the thumbnail</i></span></h2>
+          <h2>
+            Game Edit
+            <span className="tips">
+              <i>
+                remember:
+                add your questions first then update the thumbnail
+              </i>
+            </span>
+          </h2>
           <form className="col l6">
-            <div className="">{'You don\'t have question now, add your first question'}</div>
+            <div className="">
+              {'You don\'t have question now, add your first question'}
+            </div>
             {this.state.questions.map((item, index) => (
               <div className="input-field">
-                {/* 显示上次的信息 question */}
                 <span className="question">Question {index + 1}</span>
-                <button type="button" className="btn" onClick={this.handleAdd} style={{ marginRight: '10px', backgroundColor: '#e53935' }}>add</button>
-                <button type="button" className="btn" onClick={() => this.handleDelete(index)} style={{ marginRight: '10px', backgroundColor: '#01579b' }}>delete</button>
+                <button
+                  type="button"
+                  className="btn"
+                  onClick={this.handleAdd}
+                  style={{ marginRight: '10px', backgroundColor: '#e53935' }}
+                >
+                  add
+                </button>
+                <button
+                  type="button"
+                  className="btn"
+                  onClick={() => this.handleDelete(index)}
+                  style={{ marginRight: '10px', backgroundColor: '#01579b' }}
+                >
+                  delete
+                </button>
                 <Link to={`/edit/${this.props.match.params.id}/${index + 1}`} className="avatar">
-                  <button type="button" className="btn">edit</button>
+                  <button
+                    type="button"
+                    className="btn"
+                  >
+                    edit
+                  </button>
                 </Link>
               </div>
             ))}
-            <button type="button" className="btn" onClick={this.submit} style={{ marginRight: '10px' }}>save yout question before edit</button>
+            <button
+              type="button"
+              className="btn"
+              onClick={this.submit}
+              style={{ marginRight: '10px' }}
+            >
+              save your question before edit
+            </button>
           </form>
 
           <form className="col l6">
             <div>
               New Name:
-              <input value={this.state.newName} onChange={this.handleNameChange} placeholder="Change the name of current quiz if you wanna to " id="New_name_2" type="text" />
+              <input
+                value={this.state.newName}
+                onChange={this.handleNameChange}
+                placeholder="Change the name of current quiz if you wanna to "
+                id="New_name_2"
+                type="text"
+              />
             </div>
             <div className="file-field input-field">
               Update the thumbnail：
               <input type="file" multiple onChange={this.handleThumbnailChange} />
               <div className="file-path-wrapper">
-                <input id="thumbnailUpdate2" value={this.state.newThumbNail} type="text" placeholder="only *.jpg and *.png will be accepted" />
+                <input
+                  id="thumbnailUpdate2"
+                  value={this.state.newThumbNail}
+                  type="text"
+                  placeholder="only *.jpg and *.png will be accepted"
+                />
               </div>
             </div>
           </form>
-          <button className="btn waves-effect waves-light right" type="submit" name="action" onClick={this.submit} style={{ backgroundColor: '#00838f' }}>
+          <button
+            className="btn waves-effect waves-light right"
+            type="submit"
+            name="action"
+            onClick={this.submit}
+            style={{ backgroundColor: '#00838f' }}
+          >
             Submit your edit
-            <i className="material-icons right">send</i>
+            <i className="material-icons right">
+              send
+            </i>
           </button>
         </div>
       </div>
@@ -146,39 +236,102 @@ class EditGame extends React.Component {
     return (
       <div className="pageConfig question">
         <div className="row">
-          <h2>Game Edit<span className="tips"><i>remember: add your questions first then update the thumbnail</i></span></h2>
+          <h2>
+            Game Edit
+            <span className="tips">
+              <i>
+                remember: add your questions first then update the thumbnail
+              </i>
+            </span>
+          </h2>
           <form className="col l6">
-            <div className="">TOTAL QUESTIONS: {this.state.questions.length}</div>
+            <div className="">
+              TOTAL QUESTIONS:
+              {this.state.questions.length}
+            </div>
             {this.state.questions.map((item, index) => (
               <div className="input-field">
-                {/* 显示上次的信息 question */}
-                <span className="question">Question {index + 1}</span>
-                <button type="button" className="btn" onClick={this.handleAdd} style={{ marginRight: '10px', backgroundColor: '#e53935' }}>add</button>
-                <button type="button" className="btn" onClick={() => this.handleDelete(index)} style={{ marginRight: '10px', backgroundColor: '#01579b' }}>delete</button>
+                {/* 显示question No. */}
+                <span
+                  className="question"
+                >
+                  Question {index + 1}
+                </span>
+                <button
+                  type="button"
+                  className="btn"
+                  onClick={this.handleAdd}
+                  style={{ marginRight: '10px', backgroundColor: '#e53935' }}
+                >
+                  add
+                </button>
+                <button
+                  type="button"
+                  className="btn"
+                  onClick={() => this.handleDelete(index)}
+                  style={{ marginRight: '10px', backgroundColor: '#01579b' }}
+                >
+                  delete
+                </button>
                 <Link to={`/edit/${this.props.match.params.id}/${index + 1}`} className="avatar">
-                  <button type="button" className="btn">edit</button>
+                  <button
+                    type="button"
+                    className="btn"
+                  >
+                    edit
+                  </button>
                 </Link>
               </div>
             ))}
-            <button type="button" className="btn" onClick={this.submit} style={{ marginRight: '10px' }}>save yout question before edit</button>
+            <button
+              type="button"
+              className="btn"
+              onClick={this.submit}
+              style={{ marginRight: '10px' }}
+            >
+              save your question before edit
+            </button>
           </form>
 
           <form className="col l6">
             <div>
               New Name:
-              <input value={this.state.newName} onChange={this.handleNameChange} placeholder="Change the name of current quiz if you wanna to " id="New_name_2" type="text" />
+              <input
+                value={this.state.newName}
+                onChange={this.handleNameChange}
+                placeholder="Change the name of current quiz if you wanna to "
+                id="New_name_2"
+                type="text"
+              />
             </div>
             <div className="file-field input-field">
               Update the thumbnail：
-              <input type="file" multiple onChange={this.handleThumbnailChange} />
+              <input
+                type="file"
+                multiple
+                onChange={this.handleThumbnailChange}
+              />
               <div className="file-path-wrapper">
-                <input id="thumbnailUpdate2" value={this.state.newThumbNail} type="text" placeholder="only *.jpg and *.png will be accepted" />
+                <input
+                  id="thumbnailUpdate2"
+                  value={this.state.newThumbNail}
+                  type="text"
+                  placeholder="only *.jpg and *.png will be accepted"
+                />
               </div>
             </div>
           </form>
-          <button className="btn waves-effect waves-light right" type="submit" name="action" onClick={this.submit} style={{ backgroundColor: '#00838f' }}>
+          <button
+            className="btn waves-effect waves-light right"
+            type="submit"
+            name="action"
+            onClick={this.submit}
+            style={{ backgroundColor: '#00838f' }}
+          >
             Submit your edit
-            <i className="material-icons right">send</i>
+            <i className="material-icons right">
+              send
+            </i>
           </button>
         </div>
       </div>

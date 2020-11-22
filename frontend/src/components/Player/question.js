@@ -4,7 +4,6 @@
 /* eslint-disable  consistent-return */
 import React, { useEffect, useState } from 'react';
 import M from 'materialize-css';
-// import axios from 'axios';
 
 const QuestionItem = (props) => {
   const [countDown, setCountDown] = useState(props.data.duration);
@@ -15,12 +14,9 @@ const QuestionItem = (props) => {
     const answerIds = [];
     Array.from(data).forEach((item) => {
       if (item.checked) {
-        console.log(item);
         answerIds.push(item.value);
       }
     });
-
-    console.log(answerIds);
   };
 
   useEffect(() => {
@@ -32,7 +28,7 @@ const QuestionItem = (props) => {
       if (countDown > 0) {
         setCountDown((c) => c - 1);
       } else if (countDown === 0) {
-        // send requs
+        // send request
         getFormData();
         setShowAnsw(true);
       }
@@ -60,25 +56,46 @@ const QuestionItem = (props) => {
     <form className="form">
       <p>
         <label htmlFor="test1">
-          <input type="checkbox" id="test1" style={{ opacity: '1' }} className="filled-in" />
+          <input
+            type="checkbox"
+            id="test1"
+            style={{ opacity: '1' }}
+            className="filled-in"
+          />
           <span>{props.data.answers1}</span>
         </label>
       </p>
       <p>
         <label htmlFor="test2">
-          <input type="checkbox" id="test2" style={{ opacity: '1' }} className="filled-in" />
+          <input
+            type="checkbox"
+            id="test2"
+            style={{ opacity: '1' }}
+            className="filled-in"
+          />
           <span>{props.data.answers2}</span>
         </label>
       </p>
       <p>
         <label htmlFor="test3">
-          <input type="checkbox" id="test3" style={{ opacity: '1' }} className="filled-in" />
+          <input
+            type="checkbox"
+            id="test3"
+            style={{ opacity: '1' }}
+            className="filled-in"
+          />
           <span>{props.data.answers3}</span>
         </label>
       </p>
       <p>
         <label htmlFor="test4">
-          <input type="checkbox" id="test4" style={{ opacity: '1' }} className="filled-in" value={props.data.answers4} />
+          <input
+            type="checkbox"
+            id="test4"
+            style={{ opacity: '1' }}
+            className="filled-in"
+            value={props.data.answers4}
+          />
           <span>{props.data.answers4}</span>
         </label>
       </p>
@@ -89,25 +106,45 @@ const QuestionItem = (props) => {
     <form>
       <p>
         <label htmlFor="test1">
-          <input type="radio" name="group1" id="test1" style={{ opacity: '1' }} />
+          <input
+            type="radio"
+            name="group1"
+            id="test1"
+            style={{ opacity: '1' }}
+          />
           <span>{props.data.answers1}</span>
         </label>
       </p>
       <p>
         <label htmlFor="test2">
-          <input type="radio" name="group1" id="test2" style={{ opacity: '1' }} />
+          <input
+            type="radio"
+            name="group1"
+            id="test2"
+            style={{ opacity: '1' }}
+          />
           <span>{props.data.answers2}</span>
         </label>
       </p>
       <p>
         <label htmlFor="test3">
-          <input type="radio" name="group1" id="test3" style={{ opacity: '1' }} />
+          <input
+            type="radio"
+            name="group1"
+            id="test3"
+            style={{ opacity: '1' }}
+          />
           <span>{props.data.answers3}</span>
         </label>
       </p>
       <p>
         <label htmlFor="test4">
-          <input type="radio" name="group1" id="test4" style={{ opacity: '1' }} />
+          <input
+            type="radio"
+            name="group1"
+            id="test4"
+            style={{ opacity: '1' }}
+          />
           <span>{props.data.answers4}</span>
         </label>
       </p>

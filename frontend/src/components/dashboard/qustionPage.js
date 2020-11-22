@@ -1,37 +1,77 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import M from 'materialize-css';
-// import { createNewQuestion } from '../../actions/admin';
 
 export default function QuestionPage() {
   const GameId = window.location.pathname.split('/')[2];
   const QuesId = window.location.pathname.split('/')[3];
-  const [name, setName] = React.useState(localStorage.getItem(`${GameId}_${QuesId}_Info_name`));
-  const [duration, setDuration] = React.useState(localStorage.getItem(`${GameId}_${QuesId}_Info_duration`));
-  const [points, setPoints] = React.useState(localStorage.getItem(`${GameId}_${QuesId}_Info_points`));
-  const [questionType, setType] = React.useState(localStorage.getItem(`${GameId}_${QuesId}_Info_questionType`));
-  const [videoLink, setVideo] = React.useState(localStorage.getItem(`${GameId}_${QuesId}_Info_videoLink`));
-  const [correctAnswer, setCorrect] = React.useState(localStorage.getItem(`${GameId}_${QuesId}_Info_correctAnswer`));
-  const [answer1, setAnswer1] = React.useState(localStorage.getItem(`${GameId}_${QuesId}_Info_Answer1`));
-  const [answer2, setAnswer2] = React.useState(localStorage.getItem(`${GameId}_${QuesId}_Info_Answer2`));
-  const [answer3, setAnswer3] = React.useState(localStorage.getItem(`${GameId}_${QuesId}_Info_Answer3`));
-  const [answer4, setAnswer4] = React.useState(localStorage.getItem(`${GameId}_${QuesId}_Info_Answer4`));
+  const [name, setName] = React.useState(
+    localStorage.getItem(`${GameId}_${QuesId}_Info_name`),
+  );
+  const [duration, setDuration] = React.useState(
+    localStorage.getItem(`${GameId}_${QuesId}_Info_duration`),
+  );
+  const [points, setPoints] = React.useState(
+    localStorage.getItem(`${GameId}_${QuesId}_Info_points`),
+  );
+  const [questionType, setType] = React.useState(
+    localStorage.getItem(`${GameId}_${QuesId}_Info_questionType`),
+  );
+  const [videoLink, setVideo] = React.useState(
+    localStorage.getItem(`${GameId}_${QuesId}_Info_videoLink`),
+  );
+  const [correctAnswer, setCorrect] = React.useState(
+    localStorage.getItem(`${GameId}_${QuesId}_Info_correctAnswer`),
+  );
+  const [answer1, setAnswer1] = React.useState(
+    localStorage.getItem(`${GameId}_${QuesId}_Info_Answer1`),
+  );
+  const [answer2, setAnswer2] = React.useState(
+    localStorage.getItem(`${GameId}_${QuesId}_Info_Answer2`),
+  );
+  const [answer3, setAnswer3] = React.useState(
+    localStorage.getItem(`${GameId}_${QuesId}_Info_Answer3`),
+  );
+  const [answer4, setAnswer4] = React.useState(
+    localStorage.getItem(`${GameId}_${QuesId}_Info_Answer4`),
+  );
 
   useEffect(() => {
     M.AutoInit();
   });
 
   const handleSave = (event) => {
-    localStorage.setItem(`${GameId}_${QuesId}_Info_name`, name);
-    localStorage.setItem(`${GameId}_${QuesId}_Info_duration`, duration);
-    localStorage.setItem(`${GameId}_${QuesId}_Info_points`, points);
-    localStorage.setItem(`${GameId}_${QuesId}_Info_questionType`, questionType);
-    localStorage.setItem(`${GameId}_${QuesId}_Info_videoLink`, videoLink);
-    localStorage.setItem(`${GameId}_${QuesId}_Info_correctAnswer`, correctAnswer);
-    localStorage.setItem(`${GameId}_${QuesId}_Info_Answer1`, answer1);
-    localStorage.setItem(`${GameId}_${QuesId}_Info_Answer2`, answer2);
-    localStorage.setItem(`${GameId}_${QuesId}_Info_Answer3`, answer3);
-    localStorage.setItem(`${GameId}_${QuesId}_Info_Answer4`, answer4);
+    localStorage.setItem(
+      `${GameId}_${QuesId}_Info_name`,
+      name,
+    );
+    localStorage.setItem(
+      `${GameId}_${QuesId}_Info_duration`, duration,
+    );
+    localStorage.setItem(
+      `${GameId}_${QuesId}_Info_points`, points,
+    );
+    localStorage.setItem(
+      `${GameId}_${QuesId}_Info_questionType`, questionType,
+    );
+    localStorage.setItem(
+      `${GameId}_${QuesId}_Info_videoLink`, videoLink,
+    );
+    localStorage.setItem(
+      `${GameId}_${QuesId}_Info_correctAnswer`, correctAnswer,
+    );
+    localStorage.setItem(
+      `${GameId}_${QuesId}_Info_Answer1`, answer1,
+    );
+    localStorage.setItem(
+      `${GameId}_${QuesId}_Info_Answer2`, answer2,
+    );
+    localStorage.setItem(
+      `${GameId}_${QuesId}_Info_Answer3`, answer3,
+    );
+    localStorage.setItem(
+      `${GameId}_${QuesId}_Info_Answer4`, answer4,
+    );
     M.toast({
       html: 'Save Update Success',
       classes: 'rounded',
@@ -54,9 +94,15 @@ export default function QuestionPage() {
             setType(e.target.value);
           }}
         >
-          <option value="" disabled selected>{localStorage.getItem(`${GameId}_${QuesId}_Info_questionType`)}</option>
-          <option value="single choice">single choice</option>
-          <option value="multiple choice">multiple choice</option>
+          <option value="" disabled selected>
+            {localStorage.getItem(`${GameId}_${QuesId}_Info_questionType`)}
+          </option>
+          <option value="single choice">
+            single choice
+          </option>
+          <option value="multiple choice">
+            multiple choice
+          </option>
         </select>
       </div>
       <div className="input-field col s6">
@@ -169,14 +215,22 @@ export default function QuestionPage() {
               setCorrect(e.target.value);
             }}
           >
-            <option value="" disabled selected>{localStorage.getItem(`${GameId}_${QuesId}_Info_correctAnswer`)}</option>
+            <option value="" disabled selected>
+              {localStorage.getItem(`${GameId}_${QuesId}_Info_correctAnswer`)}
+            </option>
             <option value="answer1">Answer 1</option>
             <option value="answer2">Answer 2</option>
             <option value="answer3">Answer 3</option>
             <option value="answer4">Answer 4</option>
           </select>
         </div>
-        <button type="submit" className="btn waves-effect waves-light" onClick={(event) => handleSave(event)}>Save</button>
+        <button
+          type="submit"
+          className="btn waves-effect waves-light"
+          onClick={(event) => handleSave(event)}
+        >
+          Save
+        </button>
       </div>
     );
   }
@@ -188,7 +242,6 @@ export default function QuestionPage() {
         Correct Answer
         <select
           multiple
-          // style={{ display: 'block' }}
           onChange={(e) => {
             const { options } = e.target;
             const value = [];
@@ -200,14 +253,22 @@ export default function QuestionPage() {
             setCorrect(value);
           }}
         >
-          <option value="" disabled selected>{localStorage.getItem(`${GameId}_${QuesId}_Info_correctAnswer`)}</option>
+          <option value="" disabled selected>
+            {localStorage.getItem(`${GameId}_${QuesId}_Info_correctAnswer`)}
+          </option>
           <option value="answer1">Answer 1</option>
           <option value="answer2">Answer 2</option>
           <option value="answer3">Answer 3</option>
           <option value="answer4">Answer 4</option>
         </select>
       </div>
-      <button type="submit" className="btn waves-effect waves-light" onClick={(event) => handleSave(event)}>Save</button>
+      <button
+        type="submit"
+        className="btn waves-effect waves-light"
+        onClick={(event) => handleSave(event)}
+      >
+        Save
+      </button>
     </div>
   );
 }

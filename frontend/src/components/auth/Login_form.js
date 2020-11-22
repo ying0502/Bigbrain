@@ -23,7 +23,6 @@ class LoginForm extends React.Component {
     event.preventDefault();
     const email = this.nameInput.value;
     const password = this.state.pwd;
-    console.log(`this is the data:${email}、${password}`);
 
     await this.props.login({ email, password });
     if (this.props.isLoggedIn) {

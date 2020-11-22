@@ -16,6 +16,7 @@ class GameItem extends React.Component {
       modalIsOpen: false,
       length: '',
       time: '',
+      active: '',
     };
   }
 
@@ -44,9 +45,15 @@ class GameItem extends React.Component {
     if (this.props.item.active == null) {
       StartNewSession(this.props.item.id);
     } else {
+      this.setState({ active: this.props.item.active });
       this.EndSession(this.props.item.id);
     }
     this.props.reRender();
+  }
+
+  handleClick1 = () => {
+    console.log(this.props.item.active);
+    window.location.href = `result/${this.state.active}`;
   }
 
   EndSession = (quizId) => {
@@ -131,7 +138,7 @@ class GameItem extends React.Component {
                   <div>Would you like to view the results?</div>
                 </div>
                 <div className="pageConfig">
-                  <a href={`result/${this.props.item.active}`} style={{ textAlign: 'center' }}>Yes</a>
+                  <button onClick={this.handleClick1} type="button" style={{ textAlign: 'center' }}>Yes</button>
                 </div>
               </Modal>
               <Link to={`/edit/${this.props.item.id}/`} className="avatar">

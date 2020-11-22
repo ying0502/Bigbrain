@@ -4,7 +4,6 @@
  to return to a "player"
 */
 export const quizQuestionPublicReturn = question => {
-  console.log('See question: ', question);
   return question;
 };
 

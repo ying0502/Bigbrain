@@ -46,12 +46,14 @@ const SessionPage = (props) => {
     try {
       const res = await startGameRefresh(props.playerId);
       if (!res) {
+        // redirect to result page
         M.toast({
           html: 'Session ID is not an active session',
           classes: 'rounded',
         });
-        // redirect to result page
-        window.location.href = '/dashboard';
+        await setTimeout(() => {
+          window.location.href = `/myresult/${props.playerId}`;
+        }, 3000);
       }
 
       await setData(res.question);

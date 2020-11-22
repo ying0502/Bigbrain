@@ -3,7 +3,6 @@
 import React from 'react';
 import M from 'materialize-css';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import axios from 'axios';
 import Modal from 'react-modal';
 import timeTransform, { customStyles, targetUrl, Config } from '../../utils/utils';
@@ -30,7 +29,7 @@ class GameItem extends React.Component {
   }
 
   advanceClick = () => {
-    this.props.AdvanceGame(this.props.item.id);
+    AdvanceGame(this.props.item.id);
   }
 
   openModal = () => {
@@ -103,7 +102,14 @@ class GameItem extends React.Component {
               </p>
               {/* eslint-disable-next-line react/jsx-no-target-blank */}
               <a href={`game/${this.props.item.id}/${this.props.item.active}`} target="_blank">{this.props.item.active == null ? null : 'Go to Play the game!'}</a>
-              <div>{this.props.item.active == null ? '' : <button className="btn" onClick={this.advanceClick} style={{ backgroundColor: 'purple', marginBottom: '5vh' }} type="button">advance</button>}</div>
+              <div>
+                {this.props.item.active == null ? '' : (
+                  <div>
+                    <button className="btn" onClick={this.advanceClick} style={{ backgroundColor: 'purple', marginBottom: '5vh' }} type="button">advance</button>
+                    <div className="tips">Advance one time to begin session before player join first</div>
+                  </div>
+                )}
+              </div>
             </div>
             <div className="card-action">
               <button
@@ -141,6 +147,5 @@ class GameItem extends React.Component {
     );
   }
 }
-export default connect(null, { AdvanceGame })(
-  GameItem,
-);
+
+export default GameItem;

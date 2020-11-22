@@ -3,7 +3,6 @@ import M from 'materialize-css';
 import axios from 'axios';
 import {
   QUIZ_NUMBER,
-  ADVANCE,
 } from './actionTypes';
 import { targetUrl, Config } from '../utils/utils';
 
@@ -42,7 +41,7 @@ export const UpdateGame = (quizId, payload) => (dispatch) => {
   });
 };
 
-export const AdvanceGame = (quizId) => (dispatch) => {
+export const AdvanceGame = (quizId) => {
   fetch(`${targetUrl}admin/quiz/${quizId}/advance`, {
     method: 'POST',
     headers: {
@@ -64,10 +63,6 @@ export const AdvanceGame = (quizId) => (dispatch) => {
     return result.json();
   }).then((res) => {
     console.log(res);
-    dispatch({
-      type: ADVANCE,
-      payload: res,
-    });
   }).catch((err) => {
     console.log(err);
     M.toast({ html: 'Fetch fail', classes: 'rounded' });
@@ -107,6 +102,43 @@ export const startGameRefresh = async (
 ) => {
   try {
     const res = await axios.get(`${targetUrl}play/${Number(ID)}/question`, Config);
+    return res.data;
+  } catch (err) {
+    return err.response.data.err;
+  }
+};
+
+export const getAnsw = async (ID) => {
+  try {
+    const res = await axios.get(`${targetUrl}play/${Number(ID)}/answer`, Config);
+    return res.data;
+  } catch (err) {
+    return err.response.data.err;
+  }
+};
+// Update information of fame
+export const putAnsw = (ID, payload) => {
+  const answers = { answerIds: payload };
+  fetch(`${targetUrl}play/${ID}/answer`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+    body: JSON.stringify(
+      answers,
+    ),
+  }).then(() => {
+    // console.log(result);
+  }).catch(() => {
+    // console.log(err);
+    // M.toast({ html: 'Fetch fail', classes: 'rounded' });
+  });
+};
+
+export const getResult = async (ID) => {
+  try {
+    const res = await axios.get(`${targetUrl}play/${Number(ID)}/results`, Config);
     return res.data;
   } catch (err) {
     return err.response.data.err;

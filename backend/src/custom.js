@@ -14,12 +14,7 @@ export const quizQuestionPublicReturn = question => {
 */
 export const quizQuestionGetCorrectAnswers = question => {
   const correctAns = question.correctAnswer.split(',');
-  const idList = [];
-  for (let i = 0; i < correctAns.length; i++) {
-    const id = correctAns[i][-1];
-    idList.push(id);
-  }
-  return idList; // For a single answer
+  return correctAns;
 };
 
 /*
@@ -28,10 +23,10 @@ export const quizQuestionGetCorrectAnswers = question => {
 */
 export const quizQuestionGetAnswers = question => {
   return [
-    '1',
-    '2',
-    '3',
-    '4',
+    'answer1',
+    'answer2',
+    'answer3',
+    'answer4',
   ]; // For a single answer
 };
 

@@ -2,7 +2,6 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable  consistent-return */
-import { connect } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import M from 'materialize-css';
 // import axios from 'axios';
@@ -11,26 +10,41 @@ const QuestionItem = (props) => {
   const [countDown, setCountDown] = useState(props.data.duration);
   const [showAnsw, setShowAnsw] = useState(false);
 
+  const getFormData = () => {
+    const data = document.getElementsByTagName('input');
+    const answerIds = [];
+    Array.from(data).forEach((item) => {
+      if (item.checked) {
+        console.log(item);
+        answerIds.push(item.value);
+      }
+    });
+
+    console.log(answerIds);
+  };
+
   useEffect(() => {
     M.AutoInit();
   });
 
   useEffect(() => {
-    setTimeout(() => {
+    const id = setTimeout(() => {
       if (countDown > 0) {
         setCountDown((c) => c - 1);
       } else if (countDown === 0) {
-        // send request
+        // send requs
+        getFormData();
         setShowAnsw(true);
       }
     }, 1000);
+    return () => {
+      clearTimeout(id);
+    };
   }, [countDown]);
 
   useEffect(() => {
     const id = setInterval(() => {
-      if (props.stage) {
-        props.newQues();
-      }
+      props.newQues();
     }, 1000);
     return () => {
       clearInterval(id);
@@ -39,10 +53,11 @@ const QuestionItem = (props) => {
 
   useEffect(() => {
     setCountDown(props.data.duration);
+    setShowAnsw(false);
   }, [props.data.name]);
 
   const returnMult = () => (
-    <form action="#">
+    <form className="form">
       <p>
         <label htmlFor="test1">
           <input type="checkbox" id="test1" style={{ opacity: '1' }} className="filled-in" />
@@ -63,7 +78,7 @@ const QuestionItem = (props) => {
       </p>
       <p>
         <label htmlFor="test4">
-          <input type="checkbox" id="test4" style={{ opacity: '1' }} className="filled-in" />
+          <input type="checkbox" id="test4" style={{ opacity: '1' }} className="filled-in" value={props.data.answers4} />
           <span>{props.data.answers4}</span>
         </label>
       </p>
@@ -104,8 +119,7 @@ const QuestionItem = (props) => {
       <h3>{props.data.name}</h3>
 
       {props.data.questionType === 'multiple choice' ? returnMult() : returnSigl()}
-      1213333
-      { props.stage}
+
       {showAnsw
         ? (
           <div>
@@ -123,11 +137,4 @@ const QuestionItem = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  stage: state.quiz.payload.stage,
-  error: state.quiz.payload.error,
-});
-
-export default connect(mapStateToProps, null)(
-  QuestionItem,
-);
+export default QuestionItem;

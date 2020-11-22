@@ -109,7 +109,6 @@ export const startGameRefresh = async (
     const res = await axios.get(`${targetUrl}play/${Number(ID)}/question`, Config);
     return res.data;
   } catch (err) {
-    //
+    return err.response.data.err;
   }
-  return '';
 };

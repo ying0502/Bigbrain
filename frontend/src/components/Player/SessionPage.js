@@ -35,7 +35,6 @@ const SessionPage = (props) => {
   const handleClick = async () => {
     try {
       const res = await startGame(props.playerId);
-
       await setData(res.question);
       setStartQuiz(true);
     } catch (e) {
@@ -46,6 +45,15 @@ const SessionPage = (props) => {
   const handleClickRefresh = async () => {
     try {
       const res = await startGameRefresh(props.playerId);
+      if (!res) {
+        M.toast({
+          html: 'Session ID is not an active session',
+          classes: 'rounded',
+        });
+        // redirect to result page
+        window.location.href = '/dashboard';
+      }
+
       await setData(res.question);
       setStartQuiz(true);
     } catch (e) {

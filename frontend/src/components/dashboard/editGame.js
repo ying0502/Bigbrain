@@ -33,36 +33,16 @@ class EditGame extends React.Component {
     const questionList = [];
     for (let i = 1; i <= this.state.questions.length; i += 1) {
       const questionInfo = {
-        name: localStorage.getItem(
-          `${CurrentGameId}_${i}_Info_name`
-        ),
-        duration: localStorage.getItem(
-          `${CurrentGameId}_${i}_Info_duration`
-        ),
-        points: localStorage.getItem(
-          `${CurrentGameId}_${i}_Info_points`
-        ),
-        questionType: localStorage.getItem(
-          `${CurrentGameId}_${i}_Info_questionType`
-        ),
-        videoLink: localStorage.getItem(
-          `${CurrentGameId}_${i}_Info_videoLink`
-        ),
-        correctAnswer: localStorage.getItem(
-          `${CurrentGameId}_${i}_Info_correctAnswer`
-        ),
-        answers1: localStorage.getItem(
-          `${CurrentGameId}_${i}_Info_Answer1`
-        ),
-        answers2: localStorage.getItem(
-          `${CurrentGameId}_${i}_Info_Answer2`
-        ),
-        answers3: localStorage.getItem(
-          `${CurrentGameId}_${i}_Info_Answer3`
-        ),
-        answers4: localStorage.getItem(
-          `${CurrentGameId}_${i}_Info_Answer4`
-        ),
+        name: localStorage.getItem(`${CurrentGameId}_${i}_Info_name`),
+        duration: localStorage.getItem(`${CurrentGameId}_${i}_Info_duration`),
+        points: localStorage.getItem(`${CurrentGameId}_${i}_Info_points`),
+        questionType: localStorage.getItem(`${CurrentGameId}_${i}_Info_questionType`),
+        videoLink: localStorage.getItem(`${CurrentGameId}_${i}_Info_videoLink`),
+        correctAnswer: localStorage.getItem(`${CurrentGameId}_${i}_Info_correctAnswer`),
+        answers1: localStorage.getItem(`${CurrentGameId}_${i}_Info_Answer1`),
+        answers2: localStorage.getItem(`${CurrentGameId}_${i}_Info_Answer2`),
+        answers3: localStorage.getItem(`${CurrentGameId}_${i}_Info_Answer3`),
+        answers4: localStorage.getItem(`${CurrentGameId}_${i}_Info_Answer4`),
       };
       questionList.push(questionInfo);
     }
@@ -102,36 +82,16 @@ class EditGame extends React.Component {
     const CurrentGameId = this.props.match.params.id;
     const i = this.state.question + 1;
     if (`${CurrentGameId}_${i}_Info_name` in localStorage) {
-      localStorage.removeItem(
-        `${CurrentGameId}_${i}_Info_name`
-      );
-      localStorage.removeItem(
-        `${CurrentGameId}_${i}_Info_duration`
-      );
-      localStorage.removeItem(
-        `${CurrentGameId}_${i}_Info_points`
-      );
-      localStorage.removeItem(
-        `${CurrentGameId}_${i}_Info_questionType`
-      );
-      localStorage.removeItem(
-        `${CurrentGameId}_${i}_Info_videoLink`
-      );
-      localStorage.removeItem(
-        `${CurrentGameId}_${i}_Info_correctAnswer`
-      );
-      localStorage.removeItem(
-        `${CurrentGameId}_${i}_Info_Answer1`
-      );
-      localStorage.removeItem(
-        `${CurrentGameId}_${i}_Info_Answer2`
-      );
-      localStorage.removeItem(
-        `${CurrentGameId}_${i}_Info_Answer3`
-      );
-      localStorage.removeItem(
-        `${CurrentGameId}_${i}_Info_Answer4`
-      );
+      localStorage.removeItem(`${CurrentGameId}_${i}_Info_name`);
+      localStorage.removeItem(`${CurrentGameId}_${i}_Info_duration`);
+      localStorage.removeItem(`${CurrentGameId}_${i}_Info_points`);
+      localStorage.removeItem(`${CurrentGameId}_${i}_Info_questionType`);
+      localStorage.removeItem(`${CurrentGameId}_${i}_Info_videoLink`);
+      localStorage.removeItem(`${CurrentGameId}_${i}_Info_correctAnswer`);
+      localStorage.removeItem(`${CurrentGameId}_${i}_Info_Answer1`);
+      localStorage.removeItem(`${CurrentGameId}_${i}_Info_Answer2`);
+      localStorage.removeItem(`${CurrentGameId}_${i}_Info_Answer3`);
+      localStorage.removeItem(`${CurrentGameId}_${i}_Info_Answer4`);
     }
   }
 

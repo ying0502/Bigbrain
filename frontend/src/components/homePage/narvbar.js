@@ -66,7 +66,6 @@ const Narvbar = ({ isLoggedIn, logOut }) => {
               className="avatar"
             >
               logOut
-
             </Link>
           </li>
         </ul>

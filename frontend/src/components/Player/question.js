@@ -5,7 +5,6 @@
 import React, { useEffect, useState } from 'react';
 import M from 'materialize-css';
 import { putAnsw } from '../../actions/quiz';
-// import axios from 'axios';
 
 const QuestionItem = (props) => {
   const [countDown, setCountDown] = useState(props.data.duration);

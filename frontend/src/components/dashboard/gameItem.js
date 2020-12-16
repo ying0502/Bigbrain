@@ -5,7 +5,12 @@ import M from 'materialize-css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Modal from 'react-modal';
-import timeTransform, { customStyles, targetUrl, Config } from '../../utils/utils';
+import {
+  timeTransform,
+  customStyles,
+  targetUrl,
+  Config,
+} from '../../utils/utils';
 import { StartNewSession } from '../../actions/admin';
 import { AdvanceGame } from '../../actions/quiz';
 
@@ -149,4 +154,3 @@ class GameItem extends React.Component {
 }
 
 export default GameItem;
-

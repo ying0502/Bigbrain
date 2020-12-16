@@ -144,3 +144,12 @@ export const getResult = async (ID) => {
     return err.response.data.err;
   }
 };
+
+export const Result = async (ID) => {
+  try {
+    const res = await axios.get(`${targetUrl}admin/session/${Number(ID)}/results`, Config);
+    return res.data;
+  } catch (err) {
+    return err.response.data.err;
+  }
+};

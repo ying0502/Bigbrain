@@ -15,6 +15,7 @@ import HomePage from './components/homePage/homePage';
 import EditGame from './components/dashboard/editGame';
 import SessionPage from './components/Player/SessionPage';
 import MyResult from './components/Player/MyResult';
+import Result from './components/Player/Result';
 
 // import { LogoutButton } from './Logout_button';
 /* eslint-disable react/destructuring-assignment */
@@ -30,7 +31,7 @@ function App() {
         <Route exact path="/edit/:id" component={EditGame} />
         <Route exact path="/edit/:gid/:qid" component={QuestionPage} />
         <Route exact path="/game/:gid/:sid" component={SessionPage} />
-        <Route exact path="/result/:sid"><div>This is your result!</div></Route>
+        <Route exact path="/result/:sid" component={Result} />
         <Route exact path="/myresult/:pid" component={MyResult} />
       </Switch>
     </Router>
